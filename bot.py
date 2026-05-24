@@ -10,7 +10,7 @@ from telegram.ext import (
     MessageHandler, filters, ConversationHandler
 )
 
-# Logging sozlamalari (Muammolarni kuzatish uchun)
+# Logging sozlamalari
 logging.basicConfig(
     level=logging.INFO, 
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -20,10 +20,13 @@ logger = logging.getLogger(__name__)
 # ===================== SOZLAMALAR =====================
 BOT_TOKEN = os.getenv("BOT_TOKEN", "8932867764:AAFd-2yHxCqWBcnjQoK3Wy03T2hx3S04iCE")
 ADMIN_ID = 692744901
-FIXED_COMMISSION = 4000 
 
-KARTA_RAQAM = "8600 1234 5678 9012"
-KARTA_EGA_SI = "Eshmatov Toshmat"
+# --- SIZNING HAQIQIY KARTA MA'LUMOTLARINGIZ ---
+KARTA_RAQAM = "9860 3566 1848 3396"
+KARTA_EGA_SI = "Bot Admini"
+
+# --- HAR BIR BUYURTMA UCHUN KOMISSIYA (XIZMAT HAQI) ---
+FIXED_COMMISSION = 4000 
 
 REGIONS = {
     "Andijon viloyati": ["Andijon sh.", "Andijon t.", "Asaka t.", "Baliqchi t.", "Bo'ston t.", "Buloqboshi t.", "Izboskan t.", "Jalaquduq t.", "Marhamat t.", "Oltinko'l t.", "Paxtaobod t.", "Xo'jaobod t.", "Shahrixon t.", "Xonobod sh."],
@@ -78,7 +81,7 @@ def save_data():
 
 workers, orders, order_counter = load_data()
 
-# ===================== SIKLIK MENYULAR TIZIMI =====================
+# ===================== KEYBOARDS =====================
 def main_menu_keyboard():
     kb = [
         [KeyboardButton("🚀 Buyurtma berish / Ro'yxatdan o'tish")],
@@ -111,7 +114,7 @@ def districts_keyboard(region_idx):
     kb.append([InlineKeyboardButton("🔙 Orqaga", callback_data="back_region")])
     return InlineKeyboardMarkup(kb)
 
-# ===================== START VARIANTLARI =====================
+# ===================== START FUNCTION =====================
 async def start(update: Update, context):
     context.user_data.clear() 
     kb = [[InlineKeyboardButton("O'zbekcha 🇺🇿", callback_data="lang_uz")]]
@@ -225,7 +228,7 @@ async def c_phone(update: Update, context):
 async def c_location(update: Update, context):
     if update.message.location:
         lat, lon = update.message.location.latitude, update.message.location.longitude
-        context.user_data["c_location_text"] = f"https://maps.google.com/?q={lat},{lon}"
+        context.user_data["c_location_text"] = f"http://maps.google.com/?q={lat},{lon}"
     elif update.message.text:
         context.user_data["c_location_text"] = update.message.text
     else:
@@ -346,21 +349,28 @@ async def accept_order(update: Update, context):
     w = workers.get(uid)
     if not w or w.get("balance", 0) < FIXED_COMMISSION:
         try:
-            await context.bot.send_message(chat_id=uid, text="❌ Balansingizda yetarli mablag' yo'q! Shaxsiy kabinetga kirib hisobni to'ldiring.")
+            await context.bot.send_message(
+                chat_id=uid, 
+                text=f"❌ <b>Sizda yetarli mablag' yo'q!</b>\n\nBuyurtma komissiyasi: <b>{FIXED_COMMISSION:,} so'm</b>.\n"
+                     f"Sizning balansingiz: {w.get('balance', 0):,} so'm.\n"
+                     f"Iltimos, hisobingizni to'ldiring.",
+                parse_mode="HTML"
+            )
         except Exception: pass
         return
 
     order["status"] = "accepted"
     order["worker_id"] = uid
-    w["balance"] -= FIXED_COMMISSION
+    w["balance"] -= FIXED_COMMISSION 
     w["total_orders"] += 1
     save_data()
 
     await query.edit_message_text(
-        f"🎉 <b>Buyurtma #{oid} sizniki!</b>\n\n"
+        f"🎉 <b>Buyurtma #{oid} sizniki!</b>\n"
+        f"💰 Balansingizdan <b>{FIXED_COMMISSION:,} so'm</b> yechildi.\n\n"
         f"📞 Mijoz: {order['phone']}\n"
         f"🏁 Manzil: {order['target']}\n"
-        f"📍 Lokatsiya: {order['location_text']}\n"
+        f"📍 Lokatsiya: {order['location_text']}\n\n"
         f"📞 Tezda aloqaga chiqib yo'lga chiqing!",
         parse_mode="HTML"
     )
@@ -381,12 +391,13 @@ async def accept_order(update: Update, context):
 
 # ===================== HAYDOVCHILAR KABINETI TIZIMI =====================
 async def profile_cmd(update: Update, context):
-    context.user_data.clear() # Boshqa holatlar tozalanishi shart
+    if context.fsm_context if hasattr(context, 'fsm_context') else True:
+        context.user_data.clear() 
     msg = update.message if update.message else update.callback_query.message
     uid = update.effective_user.id
     if uid not in workers:
-        await msg.reply_text("Siz tizimda haydovchi sifatida ro'yxatdan o'tmagansiz!")
-        return
+        await msg.reply_text("Siz tizimda haydovchi sifatida ro'yxatdan o'tmagansiz!", reply_markup=main_menu_keyboard())
+        return ConversationHandler.END
     w = workers[uid]
     
     text = f"💳 <b>SHAXSIY KABINET</b>\n\n💰 Elektron balans: {w['balance']:,} so'm\n🛺 Jami buyurtmalar: {w['total_orders']} ta\n🆔 Sizning ID: <code>{uid}</code>"
@@ -396,6 +407,7 @@ async def profile_cmd(update: Update, context):
         [InlineKeyboardButton("🔄 Yangilash", callback_data="refresh_profile")]
     ]
     await msg.reply_text(text, reply_markup=InlineKeyboardMarkup(kb), parse_mode="HTML")
+    return ConversationHandler.END
 
 async def deposit_money(update: Update, context):
     query = update.callback_query
@@ -423,13 +435,13 @@ async def paid_notification(update: Update, context):
 async def get_pay_amount(update: Update, context):
     uid = update.effective_user.id
     if not update.message or not update.message.text:
-        await update.message.reply_text("❌ Summani matn korinishida kiriting:")
+        await update.message.reply_text("❌ Summani to'g'ri ko'rinishda kiriting:")
         return PAY_AMOUNT
         
     amount_text = update.message.text.replace(" ", "").replace(",", "").replace(".", "")
     
     if not amount_text.isdigit():
-        await update.message.reply_text("❌ Iltimos, faqat raqamlarda kiriting! Masalan: 40000")
+        await update.message.reply_text("❌ Iltimos, faqat raqamlarda kiriting! Masalan: 50000")
         return PAY_AMOUNT
         
     amount = int(amount_text)
@@ -446,17 +458,17 @@ async def get_pay_amount(update: Update, context):
             text=f"💰 <b>YANGI TO'LOV BILDIRISHNOMASI!</b>\n\n"
                  f"👤 Haydovchi: {w['name']}\n"
                  f"📞 Tel: {w['phone']}\n"
-                 f"🆔 ID raqami: <code>{uid}</code>\n"
-                 f"💵 To'lov summasi: <b>{amount:,} so'm</b>\n\n"
-                 f"Kartangizni tekshiring, agar pul tushgan bo'lsa tasdiqlang:",
+                 f"🆔 ID: <code>{uid}</code>\n"
+                 f"💵 Summa: <b>{amount:,} so'm</b>\n\n"
+                 f"Kartangizni tekshirib, tasdiqlang:",
             reply_markup=InlineKeyboardMarkup(admin_kb),
             parse_mode="HTML"
         )
     except Exception as e:
-        logger.error(f"Adminga to'lov xabari yuborishda xato: {e}")
+        logger.error(f"Adminga xabar yuborishda xato: {e}")
     
     await update.message.reply_text(
-        "✅ <b>Xabaringiz adminga yuborildi!</b>\n\nTo'lov tekshirilgandan so'ng, elektron hisobingiz tez orada to'ldiriladi.",
+        "✅ <b>Xabaringiz adminga yuborildi!</b>\n\nTo'lov tekshirilgach, balansingiz tez orada to'ldiriladi.",
         reply_markup=main_menu_keyboard()
     )
     return ConversationHandler.END
@@ -474,19 +486,19 @@ async def admin_payment_confirm(update: Update, context):
             workers[driver_id]["balance"] += amount
             save_data()
             
-            await query.edit_message_text(f"✅ ID: {driver_id} hisobiga {amount:,} so'm muvaffaqiyatli o'tkazildi.")
+            await query.edit_message_text(f"✅ ID: {driver_id} hisobiga {amount:,} so'm qo'shildi.")
             try:
                 await context.bot.send_message(
                     chat_id=driver_id,
-                    text=f"🚀 <b>To'lovingiz tasdiqlandi!</b>\n\nElektron hisobingizga <b>{amount:,} so'm</b> o'tkazildi. Buyurtmalarni qabul qilishingiz mumkin!"
+                    text=f"🚀 <b>To'lovingiz tasdiqlandi!</b>\n\nHisobingizga <b>{amount:,} so'm</b> o'tkazildi. Buyurtmalarni qabul qilishingiz mumkin!"
                 )
             except Exception: pass
     elif action == "paydenied":
-        await query.edit_message_text("❌ To'lov rad etildi va haydovchiga ogohlantirish yuborildi.")
+        await query.edit_message_text("❌ To'lov rad etildi.")
         try:
             await context.bot.send_message(
                 chat_id=driver_id,
-                text="❌ <b>To'lovingiz bekor qilindi!</b>\n\nAgar adashgan bo'lsangiz, qaytadan urinib ko'ring yoki adminga murojaat qiling."
+                text="❌ <b>To'lovingiz bekor qilindi!</b>\n\nMuvaffaqiyatsiz bo'lsa adminga murojaat qiling."
             )
         except Exception: pass
 
@@ -634,13 +646,13 @@ async def post_init(application: Application):
 def main():
     app = Application.builder().token(BOT_TOKEN).post_init(post_init).build()
     
-    # Maxsus matnli filter (Menyu tugmalari chatga yozuv bo'lib kelganda state buzilmasligi uchun)
     text_filter = filters.TEXT & ~filters.COMMAND & ~filters.Regex("^(🚀 Buyurtma berish / Ro'yxatdan o'tish|💳 Shaxsiy Kabinet \(Haydovchilar\)|ℹ️ Yordam / Ma'lumot)$")
 
     conv = ConversationHandler(
         entry_points=[
             CommandHandler("start", start),
             MessageHandler(filters.Regex("^🚀 Buyurtma berish / Ro'yxatdan o'tish$"), start),
+            MessageHandler(filters.Regex("^💳 Shaxsiy Kabinet \(Haydovchilar\)$"), profile_cmd),
             CallbackQueryHandler(deposit_money, pattern="^deposit_money$"),
             CallbackQueryHandler(paid_notification, pattern="^paid_notification$")
         ],
@@ -667,7 +679,7 @@ def main():
             MessageHandler(filters.Regex("^🚀 Buyurtma berish / Ro'yxatdan o'tish$"), start),
             MessageHandler(filters.Regex("^💳 Shaxsiy Kabinet \(Haydovchilar\)$"), profile_cmd)
         ],
-        allow_reentry=True # Foydalanuvchi adashib boshqa amal boshlasa eski stateni xavfsiz o'chiradi
+        allow_reentry=True
     )
 
     app.add_handler(conv)
