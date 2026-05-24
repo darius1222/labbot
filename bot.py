@@ -8,9 +8,10 @@ from telegram.ext import (
 )
 
 # ===================== SOZLAMALAR =====================
-BOT_TOKEN = "8932867764"
-ADMIN_ID =  692744901 # Sizning Telegram ID
-
+ # Sizning Telegram ID
+import os
+BOT_TOKEN = os.environ.get("8932867764")
+ADMIN_ID = int(os.environ.get("692744901"))
 # Komissiya jadval (narxga qarab)
 # (min_narx, max_narx, komissiya_so'm)
 COMMISSION_TABLE = [
