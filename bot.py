@@ -10,7 +10,7 @@ from telegram.ext import (
     MessageHandler, filters, ConversationHandler
 )
 
-# Logging sozlamalari (Muammolarni kuzatish uchun)
+# Logging sozlamalari
 logging.basicConfig(
     level=logging.INFO, 
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -77,67 +77,6 @@ REGIONS = {
         "Olmaliq shahar": ["Markaz", "Yangi shahar", "Sanoat"],
         "Zangiota tumani": ["Eshonguzar sh.", "Keles sh.", "Nazarbek"],
         "Qibray tumani": ["Qibray sh.", "Salor sh.", "Baytqo'rg'on"]
-    },
-    "Namangan viloyati": {
-        "Namangan shahar": ["Markaz", "Chorsu", "Dovruq"],
-        "Chust tumani": ["Chust sh.", "G'ova", "Olmos"],
-        "Pop tumani": ["Pop sh.", "Chodak", "Uygur"],
-        "Uychi tumani": ["Uychi sh.", "Unxat", "Jiydakappa"]
-    },
-    "Samarkand viloyati": {
-        "Samarkand shahar": ["Markaz", "Registon", "Siyob", "Vokzal"],
-        "Kattaqo'rg'on sh.": ["Markaz", "Yangi hayot"],
-        "Bulung'ur tumani": ["Bulung'ur sh.", "Kildon"],
-        "Ishtixon tumani": ["Ishtixon sh.", "Mitan sh."],
-        "Urgut tumani": ["Urgut sh.", "G'ozg'on", "Pochvon"]
-    },
-    "Xorazm viloyati": {
-        "Urganch shahar": ["Markaz", "Yangi bozor", "Shovot kanali"],
-        "Xiva shahar": ["Ichan Qal'a", "Dishon Qal'a"],
-        "Gurlan tumani": ["Gurlan sh.", "Vazir"],
-        "Shovot tumani": ["Shovot sh.", "Monak"],
-        "Xonqa tumani": ["Xonqa sh.", "Amudaryo"]
-    },
-    "Qashqadaryo viloyati": {
-        "Karshi shahar": ["Markaz", "Batosh", "Shayxali"],
-        "Shahrisabz shahar": ["Markaz", "Koba", "Yangi hayot"],
-        "Kitob tumani": ["Kitob sh.", "Panshanbe", "Makrid"],
-        "Chiroqchi tumani": ["Chiroqchi sh.", "Kumdaryo"],
-        "G'uzor tumani": ["G'uzor sh.", "Mash'al"]
-    },
-    "Surxondaryo viloyati": {
-        "Termiz shahar": ["Markaz", "Yulduz", "Tuproqqo'rg'on"],
-        "Denov tumani": ["Denov sh.", "Xazarbog'", "Do'stlik"],
-        "Sariosiyo tumani": ["Sariosiyo sh.", "Sharg'un sh."],
-        "Sherobod tumani": ["Sherobod sh.", "Zarabog'"],
-        "Jarqo'rg'on tumani": ["Jarqo'rg'on sh.", "Kakaydi"]
-    },
-    "Jizzax viloyati": {
-        "Jizzax shahar": ["Markaz", "Zilol", "Sayiljoy"],
-        "Zomin tumani": ["Zomin sh.", "Dashtobod sh.", "Duoba"],
-        "G'allaarol tumani": ["G'allaarol sh.", "Marjonbuloq sh."],
-        "Do'stlik tumani": ["Do'stlik sh.", "Navro'z"]
-    },
-    "Sirdaryo viloyati": {
-        "Guliston shahar": ["Markaz", "Namuna", "Yangi hayot"],
-        "Shirin shahar": ["Markaz", "Energetiklar"],
-        "Yangiyer shahar": ["Markaz", "Sanoat zonasi"],
-        "Boyovut tumani": ["Boyovut sh.", "Bekat"],
-        "Sardoba tumani": ["Paxtaobod sh.", "Birlik"]
-    },
-    "Navoiy viloyati": {
-        "Navoiy shahar": ["Markaz", "Yangi shahar", "Kimyogar"],
-        "Zarafshon shahar": ["Markaz", "Oltinchilar"],
-        "G'ozg'on shahar": ["Markaz", "Marmar obod"],
-        "Karmana tumani": ["Karmana sh.", "Malikrabot"],
-        "Nurota tumani": ["Nurota sh.", "G'ozg'on q."]
-    },
-    "Qoraqalpog'iston": {
-        "Nukus shahar": ["Markaz", "Xo'jeli guzar", "Yangi bozor"],
-        "Xo'jeli tumani": ["Xo'jeli sh.", "Vodnik"],
-        "Qo'ng'irot tumani": ["Qo'ng'irot sh.", "Oltinko'l"],
-        "Mo'ynoq tumani": ["Mo'ynoq sh.", "Tikozak"],
-        "Beruniy tumani": ["Beruniy sh.", "Shobboz"]
     }
 }
 
@@ -190,7 +129,7 @@ def driver_menu_keyboard(lang="uz"):
         ], resize_keyboard=True)
     return ReplyKeyboardMarkup([
         [KeyboardButton("🔍 Поиск заказов")],
-        [KeyboardButton("💳 Личный кабинет"), KeyboardButton("ℹ️ Помощь / Информация")]
+        [KeyboardButton("💳 Личный кабинет"), KeyboardButton("ℹ️ Помощь / Информация")],
     ], resize_keyboard=True)
 
 def regions_keyboard(prefix="reg_"):
@@ -237,7 +176,7 @@ async def start(update: Update, context):
     uid = update.effective_user.id
     msg = update.message if update.message else update.callback_query.message
     
-    # 🎯 TEKSHIRUV: Agar haydovchi bazada mavjud bo'lsa, ro'yxatdan o'tkazmasdan to'g'ri kabinetga kiradi!
+    # 🔥 ARALASHUV: Eski haydovchi kirsa, ConversationHandler'ga kirmasdan javob qaytaradi!
     if uid in workers:
         w = workers[uid]
         lang = w.get("lang", "uz")
@@ -255,12 +194,19 @@ async def start(update: Update, context):
                 reply_markup=driver_menu_keyboard(lang), 
                 parse_mode="HTML"
             )
-        return ConversationHandler.END
+        return # Shu joyda funksiya to'xtaydi, xato bermaydi!
 
+    # Agar mutlaqo yangi foydalanuvchi bo'lsa, ro'yxatdan o'tish oynasini ochamiz
     context.user_data.clear() 
     kb = [[InlineKeyboardButton("🇺🇿 O'ZBEKCHA", callback_data="lang_uz")], [InlineKeyboardButton("🇷🇺 РУССКИЙ", callback_data="lang_ru")]]
     await msg.reply_text("✨ <b>Xush kelibsiz!</b>\nTilni tanlang / Выберите язык:", reply_markup=InlineKeyboardMarkup(kb), parse_mode="HTML")
+    
+    # ConversationHandler'ni qo'lda LANG holatiga o'tkazamiz
     return LANG
+
+async def start_from_conv(update: Update, context):
+    # Bu funksiya shunchaki ConversationHandler ichidagi /start'ni ilib olish va adashtirmaslik uchun xizmat qiladi
+    return await start(update, context)
 
 async def select_lang(update: Update, context):
     query = update.callback_query
@@ -419,7 +365,6 @@ async def c_confirm(update: Update, context):
     sent_msg = await query.edit_message_text(f"⏳ <b>Ariza #{oid} haydovchilarga yuborildi!</b>\n\nAynan siz tanlagan qishloq/mahalla haydovchilariga xabar ketdi.", reply_markup=InlineKeyboardMarkup(kb), parse_mode="HTML")
     orders[oid]["client_msg_id"] = sent_msg.message_id 
 
-    # FAQAT O'SHA QISHLOQDAGI HAYDOVCHILARGA YUBORISH MULTI-CHECK FILTERI
     for wid, w in workers.items():
         if w.get("approved") and data.get("c_region") == w.get("region") and w.get("district") == data.get("district") and data.get("c_sub_district") == w.get("sub_district"):
             if w.get("balance", 0) >= FIXED_COMMISSION:
@@ -670,7 +615,6 @@ async def w_confirm(update: Update, context):
     }
     save_data()
     
-    # Arizasi kutilayotganda ham asosiy haydovchi menyusiga doimiy ruxsat berish!
     await context.bot.send_message(
         chat_id=uid, 
         text="✅ Arizangiz adminga yuborildi. Tasdiqlanish jarayonida ham menyudan foydalanishingiz mumkin.", 
@@ -725,9 +669,10 @@ async def cancel(update: Update, context):
 def main():
     application = Application.builder().token(BOT_TOKEN).build()
 
+    # Yangi foydalanuvchilar zanjiri
     conv_handler = ConversationHandler(
         entry_points=[
-            CommandHandler("start", start),
+            CommandHandler("start", start_from_conv), # Agar conv ichida start bosilsa ham ishlayveradi
             MessageHandler(filters.Regex("^🚀 Botni boshlash / Rol tanlash|^🚀 Запустить бота / Выбор роли"), start),
             MessageHandler(filters.Regex("^📦 Yuk yuborish \(Buyurtma\)|^📦 Отправить груз \(Заказ\)"), start_client_order)
         ],
@@ -756,6 +701,10 @@ def main():
         fallbacks=[CommandHandler("cancel", cancel)]
     )
 
+    # 🔥 ENG MUHIM TUZATISH: Umumiy CommandHandler("start") ni birinchi navbatda qo'shamiz!
+    # Bu orqali eski haydovchilar to'g'ridan-to'g'ri conv'ga kirmasdan ushlanadi va ularga menyu chiqadi.
+    application.add_handler(CommandHandler("start", start))
+    
     application.add_handler(conv_handler)
     application.add_handler(MessageHandler(filters.Regex("^🔍 Buyurtmalarni qidirish|^🔍 Поиск заказов"), search_orders_cmd))
     application.add_handler(MessageHandler(filters.Regex("^💳 Shaxsiy Kabinet|^💳 Личный кабинет"), shaxsiy_kabinet))
