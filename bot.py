@@ -10,7 +10,7 @@ from telegram.ext import (
     MessageHandler, filters, ConversationHandler
 )
 
-# Logging sozlamalari
+# Logging sozlamalari (Muammolarni kuzatish uchun)
 logging.basicConfig(
     level=logging.INFO, 
     format='%(asctime)s - %(name)s - %(levelname)s - %(message)s'
@@ -25,7 +25,7 @@ KARTA_RAQAM = "9860 3566 1848 3396"
 KARTA_EGA_SI = "Bot Admini"
 FIXED_COMMISSION = 4000 
 
-# IYERARXIK HUDUDLAR RO'YXATI (Viloyat -> Tuman -> Qishloq/Shaharacha/Mahalla)
+# O'ZBEKISTONNING BARCHA VILOYATLARI VA HUDUDLARI
 REGIONS = {
     "Andijon viloyati": {
         "Andijon shahar": ["Markaz", "Sanoat zonasi", "Yangi shahar"],
@@ -34,15 +34,8 @@ REGIONS = {
         "Baliqchi tumani": ["Baliqchi sh.", "Chinabad sh.", "Xo'jaabad"],
         "Bo'ston tumani": ["Bo'z sh.", "Shaxrixonchek", "Xovos"],
         "Buloqboshi tumani": [
-            "Buloqboshi sh. (Markaz)", 
-            "Andijon MFY", 
-            "Uchtepa MFY", 
-            "Kullas MFY", 
-            "Shirmonbuloq q.", 
-            "Nayman MFY", 
-            "Keltepa MFY", 
-            "Sarvontepa MFY", 
-            "Tog'liq MFY"
+            "Buloqboshi sh. (Markaz)", "Andijon MFY", "Uchtepa MFY", "Kullas MFY", 
+            "Shirmonbuloq q.", "Nayman MFY", "Keltepa MFY", "Sarvontepa MFY", "Tog'liq MFY"
         ],
         "Izboskan tumani": ["Paytug' sh.", "Gurkirov", "Maygir"],
         "Jalaquduq tumani": ["Oxunboboyev sh.", "Janubiy Olamushuk", "Ko'qon"],
@@ -50,30 +43,107 @@ REGIONS = {
         "Oltinko'l tumani": ["Oltinko'l q.", "Chinnaobod", "Bo'ston"],
         "Paxtaobod tumani": ["Paxtaobod sh.", "Ko'qonboy", "Madaniyat"],
         "Xo'jaobod tumani": [
-            "Xo'jaobod sh. (Markaz)", 
-            "Karnaychi MFY", 
-            "Qorabuloq MFY", 
-            "Uchko'cha MFY", 
-            "Mustahkam MFY", 
-            "Baxrin MFY", 
-            "Dilkushod ShFY", 
-            "Guliston sh.", 
-            "Ko'tarma sh.", 
-            "Manak sh.", 
-            "Xidirsha sh.", 
-            "Birlashgan q."
+            "Xo'jaobod sh. (Markaz)", "Karnaychi MFY", "Qorabuloq MFY", "Uchko'cha MFY", 
+            "Mustahkam MFY", "Baxrin MFY", "Dilkushod ShFY", "Guliston sh.", "Ko'tarma sh.", 
+            "Manak sh.", "Xidirsha sh.", "Birlashgan q."
         ],
         "Shahrixon tumani": ["Shahrixon sh.", "Segaza", "Vodil"],
         "Xonobod shahar": ["Xonobod sh.", "Xonobod q."]
     },
-    "Buxoro viloyati": {"Buxoro sh.": ["Markaz"], "Buxoro t.": ["Galaosiyo sh."]},
-    "Farg'ona viloyati": {"Farg'ona sh.": ["Markaz"], "Marg'ilon sh.": ["Markaz"], "Qo'qon sh.": ["Markaz"]},
-    "Toshkent shahri": {"Chilonzor r.": ["Markaz"], "Yunusobod r.": ["Markaz"]}
+    "Buxoro viloyati": {
+        "Buxoro shahar": ["Markaz", "Kalon", "Yangi Bozor"],
+        "Gijduvon tumani": ["Gijduvon sh.", "Zafarabod", "Armechan"],
+        "Kogon tumani": ["Kogon sh.", "Tutkunda", "Sarkor"],
+        "Qorakul tumani": ["Qorakul sh.", "Sayat", "Dargali"],
+        "Olot tumani": ["Olot sh.", "Chovdur", "Jumabozor"]
+    },
+    "Farg'ona viloyati": {
+        "Farg'ona shahar": ["Markaz", "Kirgili", "Yormozor"],
+        "Marg'ilon shahar": ["Markaz", "Kombinat", "Ipakchi"],
+        "Qo'qon shahar": ["Markaz", "Ashurxona", "Yangi Chorsu"],
+        "Oltiariq tumani": ["Oltiariq sh.", "Tinchlik sh.", "Kapchugay"],
+        "Rishton tumani": ["Rishton sh.", "Zohidon", "Avval"]
+    },
+    "Toshkent shahri": {
+        "Chilonzor tumani": ["Oqtepa", "Algoritm", "Chilonzor massivi"],
+        "Yunusobod tumani": ["Yunusobod 1-19 kvartal", "Bodomzor", "Shahriston"],
+        "Yashnobod tumani": ["Kadisheva", "Tuzel", "Katta Qo'yliq"],
+        "Mirzo Ulug'bek t.": ["TTZ", "Qorasuv", "Massiv Feruza"],
+        "Olmazor tumani": ["Qoraqamish", "Chig'atoy", "Beruniy"]
+    },
+    "Toshkent viloyati": {
+        "Chirchiq shahar": ["Markaz", "Yubileyniy", "Azatbash"],
+        "Angren shahar": ["Markaz", "Dukent", "Konchilar"],
+        "Olmaliq shahar": ["Markaz", "Yangi shahar", "Sanoat"],
+        "Zangiota tumani": ["Eshonguzar sh.", "Keles sh.", "Nazarbek"],
+        "Qibray tumani": ["Qibray sh.", "Salor sh.", "Baytqo'rg'on"]
+    },
+    "Namangan viloyati": {
+        "Namangan shahar": ["Markaz", "Chorsu", "Dovruq"],
+        "Chust tumani": ["Chust sh.", "G'ova", "Olmos"],
+        "Pop tumani": ["Pop sh.", "Chodak", "Uygur"],
+        "Uychi tumani": ["Uychi sh.", "Unxat", "Jiydakappa"]
+    },
+    "Samarkand viloyati": {
+        "Samarkand shahar": ["Markaz", "Registon", "Siyob", "Vokzal"],
+        "Kattaqo'rg'on sh.": ["Markaz", "Yangi hayot"],
+        "Bulung'ur tumani": ["Bulung'ur sh.", "Kildon"],
+        "Ishtixon tumani": ["Ishtixon sh.", "Mitan sh."],
+        "Urgut tumani": ["Urgut sh.", "G'ozg'on", "Pochvon"]
+    },
+    "Xorazm viloyati": {
+        "Urganch shahar": ["Markaz", "Yangi bozor", "Shovot kanali"],
+        "Xiva shahar": ["Ichan Qal'a", "Dishon Qal'a"],
+        "Gurlan tumani": ["Gurlan sh.", "Vazir"],
+        "Shovot tumani": ["Shovot sh.", "Monak"],
+        "Xonqa tumani": ["Xonqa sh.", "Amudaryo"]
+    },
+    "Qashqadaryo viloyati": {
+        "Karshi shahar": ["Markaz", "Batosh", "Shayxali"],
+        "Shahrisabz shahar": ["Markaz", "Koba", "Yangi hayot"],
+        "Kitob tumani": ["Kitob sh.", "Panshanbe", "Makrid"],
+        "Chiroqchi tumani": ["Chiroqchi sh.", "Kumdaryo"],
+        "G'uzor tumani": ["G'uzor sh.", "Mash'al"]
+    },
+    "Surxondaryo viloyati": {
+        "Termiz shahar": ["Markaz", "Yulduz", "Tuproqqo'rg'on"],
+        "Denov tumani": ["Denov sh.", "Xazarbog'", "Do'stlik"],
+        "Sariosiyo tumani": ["Sariosiyo sh.", "Sharg'un sh."],
+        "Sherobod tumani": ["Sherobod sh.", "Zarabog'"],
+        "Jarqo'rg'on tumani": ["Jarqo'rg'on sh.", "Kakaydi"]
+    },
+    "Jizzax viloyati": {
+        "Jizzax shahar": ["Markaz", "Zilol", "Sayiljoy"],
+        "Zomin tumani": ["Zomin sh.", "Dashtobod sh.", "Duoba"],
+        "G'allaarol tumani": ["G'allaarol sh.", "Marjonbuloq sh."],
+        "Do'stlik tumani": ["Do'stlik sh.", "Navro'z"]
+    },
+    "Sirdaryo viloyati": {
+        "Guliston shahar": ["Markaz", "Namuna", "Yangi hayot"],
+        "Shirin shahar": ["Markaz", "Energetiklar"],
+        "Yangiyer shahar": ["Markaz", "Sanoat zonasi"],
+        "Boyovut tumani": ["Boyovut sh.", "Bekat"],
+        "Sardoba tumani": ["Paxtaobod sh.", "Birlik"]
+    },
+    "Navoiy viloyati": {
+        "Navoiy shahar": ["Markaz", "Yangi shahar", "Kimyogar"],
+        "Zarafshon shahar": ["Markaz", "Oltinchilar"],
+        "G'ozg'on shahar": ["Markaz", "Marmar obod"],
+        "Karmana tumani": ["Karmana sh.", "Malikrabot"],
+        "Nurota tumani": ["Nurota sh.", "G'ozg'on q."]
+    },
+    "Qoraqalpog'iston": {
+        "Nukus shahar": ["Markaz", "Xo'jeli guzar", "Yangi bozor"],
+        "Xo'jeli tumani": ["Xo'jeli sh.", "Vodnik"],
+        "Qo'ng'irot tumani": ["Qo'ng'irot sh.", "Oltinko'l"],
+        "Mo'ynoq tumani": ["Mo'ynoq sh.", "Tikozak"],
+        "Beruniy tumani": ["Beruniy sh.", "Shobboz"]
+    }
 }
 
 REG_KEYS = list(REGIONS.keys())
 
-# HOLATLAR (STATES)
+# CONVERSATION HOLATLARI
 (
     LANG, ROLE,
     C_REGION, C_DISTRICT, C_SUB_DISTRICT, C_TARGET, C_DESC, C_TIME, C_PHONE, C_LOCATION, C_CONFIRM,
@@ -92,7 +162,7 @@ def load_data():
                 counter = loaded.get("order_counter", [1])
                 return workers, orders, counter
         except Exception as e:
-            logger.error(f"Bazani yuklashda xato: {e}")
+            logger.error(f"Ma'lumotlarni o'qishda xatolik: {e}")
             return {}, {}, [1]
     return {}, {}, [1]
 
@@ -102,20 +172,15 @@ def save_data():
         with open(DATA_FILE, "w", encoding="utf-8") as f:
             json.dump({"workers": workers, "orders": orders, "order_counter": order_counter}, f, ensure_ascii=False, indent=4)
     except Exception as e:
-        logger.error(f"Bazaga yozishda xato: {e}")
+        logger.error(f"Ma'lumotlarni yozishda xatolik: {e}")
 
 workers, orders, order_counter = load_data()
 
-# ===================== MENYULAR =====================
-def start_menu_keyboard(lang="uz"):
-    text = "🚀 Botni boshlash / Rol tanlash" if lang == "uz" else "🚀 Запустить бота / Выбор роли"
-    return ReplyKeyboardMarkup([[KeyboardButton(text)]], resize_keyboard=True)
-
+# ===================== SILLIQ KLAVIATURALAR =====================
 def client_menu_keyboard(lang="uz"):
     if lang == "uz":
         return ReplyKeyboardMarkup([[KeyboardButton("📦 Yuk yuborish (Buyurtma)")], [KeyboardButton("ℹ️ Yordam / Ma'lumot")]], resize_keyboard=True)
-    else:
-        return ReplyKeyboardMarkup([[KeyboardButton("📦 Отправить груз (Заказ)")], [KeyboardButton("ℹ️ Помощь / Информация")]], resize_keyboard=True)
+    return ReplyKeyboardMarkup([[KeyboardButton("📦 Отправить груз (Заказ)")], [KeyboardButton("ℹ️ Помощь / Информация")]], resize_keyboard=True)
 
 def driver_menu_keyboard(lang="uz"):
     if lang == "uz":
@@ -123,11 +188,10 @@ def driver_menu_keyboard(lang="uz"):
             [KeyboardButton("🔍 Buyurtmalarni qidirish")],
             [KeyboardButton("💳 Shaxsiy Kabinet"), KeyboardButton("ℹ️ Yordam / Ma'lumot")]
         ], resize_keyboard=True)
-    else:
-        return ReplyKeyboardMarkup([
-            [KeyboardButton("🔍 Поиск заказов")],
-            [KeyboardButton("💳 Личный кабинет"), KeyboardButton("ℹ️ Помощь / Информация")]
-        ], resize_keyboard=True)
+    return ReplyKeyboardMarkup([
+        [KeyboardButton("🔍 Поиск заказов")],
+        [KeyboardButton("💳 Личный кабинет"), KeyboardButton("ℹ️ Помощь / Информация")]
+    ], resize_keyboard=True)
 
 def regions_keyboard(prefix="reg_"):
     kb = []
@@ -167,23 +231,32 @@ def sub_districts_keyboard(region_name, district_name, prefix="sub_", back_callb
     kb.append([InlineKeyboardButton("🔙 Orqaga", callback_data=back_callback)])
     return InlineKeyboardMarkup(kb)
 
-# ===================== START QISMI =====================
+# ===================== ASOSIY START LOXIKASI =====================
 async def start(update: Update, context):
+    global workers
     uid = update.effective_user.id
     msg = update.message if update.message else update.callback_query.message
     
+    # 🎯 TEKSHIRUV: Agar haydovchi bazada mavjud bo'lsa, ro'yxatdan o'tkazmasdan to'g'ri kabinetga kiradi!
     if uid in workers:
         w = workers[uid]
         lang = w.get("lang", "uz")
         context.user_data["lang"] = lang 
+        
         if w.get("approved"):
-            await msg.reply_text("<b>Xush kelibsiz, haydovchi!</b>", reply_markup=driver_menu_keyboard(lang), parse_mode="HTML")
-            return ConversationHandler.END
+            await msg.reply_text(
+                f"<b>Xush kelibsiz, {w['name']}!</b>\n\nTizim sizni tanidi. Haydovchi rejimingiz faol.", 
+                reply_markup=driver_menu_keyboard(lang), 
+                parse_mode="HTML"
+            )
         else:
-            await msg.reply_text("<b>Sizning arizangiz hali ko'rib chiqilmoqda.</b>", parse_mode="HTML")
-            return ConversationHandler.END
+            await msg.reply_text(
+                "<b>Sizning arizangiz kutilmoqda.</b>\nAdmin tasdiqlashi bilan buyurtmalarni olishingiz mumkin.", 
+                reply_markup=driver_menu_keyboard(lang), 
+                parse_mode="HTML"
+            )
+        return ConversationHandler.END
 
-    # user_data ni tozalaymiz lekin tilni xavfsiz saqlash uchun to'liq o'chirmaymiz
     context.user_data.clear() 
     kb = [[InlineKeyboardButton("🇺🇿 O'ZBEKCHA", callback_data="lang_uz")], [InlineKeyboardButton("🇷🇺 РУССКИЙ", callback_data="lang_ru")]]
     await msg.reply_text("✨ <b>Xush kelibsiz!</b>\nTilni tanlang / Выберите язык:", reply_markup=InlineKeyboardMarkup(kb), parse_mode="HTML")
@@ -217,7 +290,7 @@ async def role_sel(update: Update, context):
         await query.edit_message_text("Haydovchi ro'yxatdan o'tish oynasi.\nViloyatni tanlang:", reply_markup=regions_keyboard("wreg_"))
         return W_REGION
 
-# ===================== MIJOZ OQIMI =====================
+# ===================== MIJOZ ARIZA OQIMI =====================
 async def start_client_order(update: Update, context):
     lang = context.user_data.get("lang", "uz")
     if update.message and update.message.text:
@@ -284,10 +357,6 @@ async def c_desc(update: Update, context):
     await update.message.reply_text("🕒 Yuk qachon olib ketilishi kerak?", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True, one_time_keyboard=True))
     return C_TIME
 
-async def c_desc_fallback(update: Update, context):
-    await update.message.reply_text("Iltimos, yuk turini tugmalardan tanlang yoki matn ko'rinishida yozing.")
-    return C_DESC
-
 async def c_time(update: Update, context):
     context.user_data["c_time"] = update.message.text if update.message.text else "Kelishiladi"
     kb = [[KeyboardButton("📱 Telefon raqamni yuborish", request_contact=True)]]
@@ -295,10 +364,7 @@ async def c_time(update: Update, context):
     return C_PHONE
 
 async def c_phone(update: Update, context):
-    if update.message.contact:
-        phone = update.message.contact.phone_number
-    else:
-        phone = update.message.text
+    phone = update.message.contact.phone_number if update.message.contact else update.message.text
     context.user_data["c_phone"] = phone
     kb = [[KeyboardButton("📍 Joylashuvni yuborish", request_location=True)]]
     await update.message.reply_text("Yuk lokatsiyasini yuboring (yoki matn yozing):", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True, one_time_keyboard=True))
@@ -331,8 +397,6 @@ async def c_confirm(update: Update, context):
     await query.answer()
     global order_counter, orders, workers
     
-    lang = context.user_data.get("lang", "uz")
-    
     if query.data == "c_cancel":
         await query.edit_message_text("Ariza bekor qilindi.")
         return ConversationHandler.END
@@ -341,6 +405,7 @@ async def c_confirm(update: Update, context):
     data = context.user_data
     oid = int(order_counter[0]) 
     order_counter[0] += 1
+    lang = data.get("lang", "uz")
 
     orders[oid] = {
         "id": oid, "client_id": uid, "region": data.get("c_region"), "district": data.get("c_district"), "sub_district": data.get("c_sub_district"),
@@ -354,8 +419,9 @@ async def c_confirm(update: Update, context):
     sent_msg = await query.edit_message_text(f"⏳ <b>Ariza #{oid} haydovchilarga yuborildi!</b>\n\nAynan siz tanlagan qishloq/mahalla haydovchilariga xabar ketdi.", reply_markup=InlineKeyboardMarkup(kb), parse_mode="HTML")
     orders[oid]["client_msg_id"] = sent_msg.message_id 
 
+    # FAQAT O'SHA QISHLOQDAGI HAYDOVCHILARGA YUBORISH MULTI-CHECK FILTERI
     for wid, w in workers.items():
-        if w.get("approved") and data.get("c_region") == w.get("region") and w.get("district") == data.get("c_district") and w.get("sub_district") == w.get("sub_district"):
+        if w.get("approved") and data.get("c_region") == w.get("region") and w.get("district") == data.get("district") and data.get("c_sub_district") == w.get("sub_district"):
             if w.get("balance", 0) >= FIXED_COMMISSION:
                 drv_kb = [[InlineKeyboardButton(f"🛺 Qabul qilish ({FIXED_COMMISSION:,} so'm)", callback_data=f"accept_{oid}")]]
                 try:
@@ -374,16 +440,20 @@ async def c_confirm(update: Update, context):
     save_data()
     return ConversationHandler.END
 
-# ===================== HAYDOVCHILAR QIDIRUVI =====================
+# ===================== HAYDOVCHI ISHLASH ENGINI =====================
 async def search_orders_cmd(update: Update, context):
     global orders, workers
     uid = update.effective_user.id
-    if uid not in workers or not workers[uid].get("approved"): return
+    if uid not in workers: return
 
     w = workers[uid]
     hr_region = w.get("region")
     hr_district = w.get("district")
     hr_sub = w.get("sub_district")
+
+    if not w.get("approved"):
+        await update.message.reply_text("⚠️ Arizangiz hali admin tomonidan tasdiqlanmagan. Tasdiqlanishini kuting!")
+        return
 
     found_orders = []
     for oid, o in orders.items():
@@ -406,14 +476,14 @@ async def refresh_search_callback(update: Update, context):
     global orders, workers
     uid = query.from_user.id
     w = workers.get(uid)
-    if not w: return
+    if not w or not w.get("approved"): return
 
     found_orders = [o for o in orders.values() if o["status"] == "pending" and o["region"] == w["region"] and o["district"] == w["district"] and o.get("sub_district") == w["sub_district"]]
 
     if not found_orders:
         try:
             kb = [[InlineKeyboardButton("🔄 Qayta yangilash", callback_data="refresh_search")]]
-            await query.edit_message_text(f"⏳ Yangilik yo'q.\nHudud: {w['sub_district']}", reply_markup=InlineKeyboardMarkup(kb), parse_mode="HTML")
+            await query.edit_message_text(f"⏳ Hozircha yangi buyurtma yo'q.\nHudud: {w['sub_district']}", reply_markup=InlineKeyboardMarkup(kb), parse_mode="HTML")
         except Exception: pass
         return
 
@@ -422,7 +492,6 @@ async def refresh_search_callback(update: Update, context):
         drv_kb = [[InlineKeyboardButton("🛺 Qabul qilish", callback_data=f"accept_{o['id']}")]]
         await context.bot.send_message(chat_id=uid, text=f"📦 <b>#{o['id']}</b>\n Manzil: {o['target']}", reply_markup=InlineKeyboardMarkup(drv_kb))
 
-# ===================== BUYURTMANI PASSPORT/PROCESSI =====================
 async def accept_order(update: Update, context):
     query = update.callback_query
     await query.answer()
@@ -469,8 +538,7 @@ async def client_cancel_order(update: Update, context):
     if oid not in orders: return
     order = orders[oid]
     
-    if order["status"] == "cancelled_by_client":
-        return
+    if order["status"] == "cancelled_by_client": return
 
     order["status"] = "cancelled_by_client"
     wid = order["worker_id"]
@@ -499,7 +567,7 @@ async def driver_cancel_order(update: Update, context):
     try: await context.bot.send_message(order["client_id"], "⚠️ Haydovchi buyurtmani bekor qildi. Tizim qayta qidirmoqda...")
     except Exception: pass
 
-# ===================== HAYDOVCHI RO'YXATI =====================
+# ===================== HAYDOVCHINI RO'YXATDAN O'TKAZISH OQIMI =====================
 async def w_region(update: Update, context):
     query = update.callback_query
     await query.answer()
@@ -566,10 +634,7 @@ async def w_car_number(update: Update, context):
     return W_PHONE
 
 async def w_phone(update: Update, context):
-    if update.message.contact:
-        phone = update.message.contact.phone_number
-    else:
-        phone = update.message.text
+    phone = update.message.contact.phone_number if update.message.contact else update.message.text
     context.user_data["w_phone"] = phone
     
     data = context.user_data
@@ -592,7 +657,7 @@ async def w_confirm(update: Update, context):
     global workers
     
     if query.data == "w_cancel":
-        await query.edit_message_text("Ro'yxatdan o'tish bekor qilindi. /start ni bosing.")
+        await query.edit_message_text("Ro'yxatdan o'tish bekor qilindi. Qayta boshlash: /start")
         return ConversationHandler.END
         
     uid = query.from_user.id
@@ -605,7 +670,12 @@ async def w_confirm(update: Update, context):
     }
     save_data()
     
-    await query.edit_message_text("✅ Arizangiz adminga yuborildi. Tez orada tasdiqlanadi.")
+    # Arizasi kutilayotganda ham asosiy haydovchi menyusiga doimiy ruxsat berish!
+    await context.bot.send_message(
+        chat_id=uid, 
+        text="✅ Arizangiz adminga yuborildi. Tasdiqlanish jarayonida ham menyudan foydalanishingiz mumkin.", 
+        reply_markup=driver_menu_keyboard(data.get("lang", "uz"))
+    )
     
     admin_txt = f"🆕 <b>YANGI HAYDOVCHI:</b>\n\nID: <code>{uid}</code>\n👤 Ism: {data.get('w_name')}\n📍 Hudud: {data.get('w_region')}, {data.get('w_district')}, {data.get('w_sub_district')}"
     kb = [[InlineKeyboardButton("✅ Tasdiqlash", callback_data=f"admin_approve_{uid}")], [InlineKeyboardButton("❌ Rad etish", callback_data=f"admin_reject_{uid}")]]
@@ -626,7 +696,7 @@ async def admin_callback(update: Update, context):
             workers[target_id]["approved"] = True
             save_data()
             await query.edit_message_text(f"✅ Haydovchi (ID: {target_id}) tasdiqlandi.")
-            try: await context.bot.send_message(target_id, "🎉 Arizangiz tasdiqlandi! Botni qayta ishga tushiring: /start", reply_markup=driver_menu_keyboard(workers[target_id]["lang"]))
+            try: await context.bot.send_message(target_id, "🎉 Arizangiz tasdiqlandi! Endi buyurtmalarni bekorlarsiz qidirishingiz mumkin.", reply_markup=driver_menu_keyboard(workers[target_id]["lang"]))
             except Exception: pass
     elif act == "reject":
         if target_id in workers:
@@ -634,22 +704,24 @@ async def admin_callback(update: Update, context):
             save_data()
             await query.edit_message_text(f"❌ Arizasi rad etildi va o'chirildi.")
 
+# ===================== DOIMIYLIK VA MA'LUMOTLAR PANELI =====================
 async def shaxsiy_kabinet(update: Update, context):
     global workers
     uid = update.effective_user.id
     if uid not in workers: return
     w = workers[uid]
-    text = f"💳 <b>SHAXSIY KABINET</b>\n\n👤 Ism: {w['name']}\n🏠 Hudud: {w['sub_district']}\n💰 Balans: {w['balance']:,} so'm\n🛺 Buyurtmalar: {w['total_orders']} ta\n\n💵 Karta: <code>{KARTA_RAQAM}</code>\nEga si: {KARTA_EGA_SI}"
+    status = "Aktiv ✅" if w.get("approved") else "Kutilmoqda ⏳"
+    text = f"💳 <b>SHAXSIY KABINET</b>\n\n👤 Ism: {w['name']}\n🏠 Ish hududi: {w['sub_district']}\n📊 Holati: {status}\n💰 Balans: {w['balance']:,} so'm\n🛺 Jami buyurtmalar: {w['total_orders']} ta\n\n💵 Karta: <code>{KARTA_RAQAM}</code>\nEga si: {KARTA_EGA_SI}"
     await update.message.reply_text(text, parse_mode="HTML")
 
 async def yordam_info(update: Update, context):
-    await update.message.reply_text("ℹ️ Labo xizmati bot tizimi v2.5.\nMurojaat uchun admin: @admin_username")
+    await update.message.reply_text("ℹ️ Maxsus Yuk Tashish Xizmati Tizimi v3.0.\nMurojaat uchun admin: @admin_username")
 
 async def cancel(update: Update, context):
     await update.message.reply_text("Jarayon bekor qilindi. Bosh menyu: /start", reply_markup=ReplyKeyboardRemove())
     return ConversationHandler.END
 
-# ===================== RUN =====================
+# ===================== MAIN ENGINE RUN =====================
 def main():
     application = Application.builder().token(BOT_TOKEN).build()
 
