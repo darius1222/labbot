@@ -25,32 +25,50 @@ KARTA_RAQAM = "9860 3566 1848 3396"
 KARTA_EGA_SI = "Bot Admini"
 FIXED_COMMISSION = 4000 
 
+# IYERARXIK HUDUDLAR RO'YXATI (Viloyat -> Tuman -> Qishloq/Shaharacha/Mahalla)
 REGIONS = {
-    "Andijon viloyati": [
-        "Andijon sh.", "Andijon t.", "Asaka t.", "Baliqchi t.", "Bo'ston t.", 
-        "Buloqboshi t. (Shaharcha)", "Buloqboshi t. (Andijon MFY)", "Buloqboshi t. (Uchtepa MFY)", 
-        "Buloqboshi t. (Kullas MFY)", "Buloqboshi t. (Shirmonbuloq)", "Buloqboshi t. (Nayman MFY)", 
-        "Buloqboshi t. (Keltepa MFY)", "Buloqboshi t. (Sarvontepa MFY)", "Buloqboshi t. (Tog'liq MFY)",
-        "Izboskan t.", "Jalaquduq t.", "Marhamat t.", "Oltinko'l t.", "Paxtaobod t.", 
-        "Xo'jaobod t. (Karnaychi MFY)", "Xo'jaobod t. (Qorabuloq MFY)", "Xo'jaobod t. (Uchko'cha MFY)", 
-        "Xo'jaobod t. (Mustahkam MFY)", "Xo'jaobod t. (Baxrin MFY)", "Xo'jaobod t. (Dilkushod ShFY)", 
-        "Xo'jaobod t. (Guliston sh.)", "Xo'jaobod t. (Ko'tarma sh.)", "Xo'jaobod t. (Manak sh.)", 
-        "Xo'jaobod t. (Xidirsha sh.)", "Xo'jaobod t. (Birlashgan)", 
-        "Shahrixon t.", "Xonobod sh."
-    ],
-    "Buxoro viloyati": ["Buxoro sh.", "Buxoro t.", "Kogon sh.", "Kogon t.", "Olot t.", "G'ijduvon t.", "Jondor t.", "Qorako'l t.", "Peshku t.", "Romitan t.", "Shofirkon t.", "Vobkent t."],
-    "Farg'ona viloyati": ["Farg'ona sh.", "Farg'ona t.", "Marg'ilon sh.", "Qo'qon sh.", "Quva t.", "Quvasoy sh.", "Oltiariq t.", "Bag'dod t.", "Beshariq t.", "Buvayda t.", "Dang'ara t.", "Yozyovon t.", "Qo'shtepa t.", "Rishton t.", "So'x t.", "Toshloq t.", "Uchko'prik t.", "O'zbekiston t."],
-    "Jizzax viloyati": ["Jizzax sh.", "Arnasoy t.", "G'allaorol t.", "Sharaf Rashidov t.", "Do'stlik t.", "Zomin t.", "Zarbdor t.", "Zafarobod t.", "Mirzacho'l t.", "Paxtakor t.", "Forish t.", "Baxmal t.", "Yangiyabad t."],
-    "Xorazm viloyati": ["Urganch sh.", "Urganch t.", "Xiva sh.", "Xiva t.", "Bog'ot t.", "Gurlan t.", "Qo'shko'pir t.", "Shovot t.", "Xonqa t.", "Hazorasp t.", "Yangiariq t.", "Yangibozor t.", "Tuproqqal'a t."],
-    "Namangan viloyati": ["Namangan sh.", "Chartaq t.", "Chust t.", "Kosonsoy t.", "Mingbuloq t.", "Namangan t.", "Naryn t.", "Pop t.", "To'raqo'rg'on t.", "Uychi t.", "Uchqo'rg'on t.", "Yangiqo'rg'on t."],
-    "Navoiy viloyati": ["Navoiy sh.", "Zarafshon sh.", "Karmana t.", "Konimex t.", "Qiziltepa t.", "Navbahor t.", "Nurota t.", "Tomdi t.", "Uchquduq t.", "Xatirchi t."],
-    "Qashqadaryo viloyati": ["Karshi sh.", "Karshi t.", "Shaxrisabz sh.", "Shaxrisabz t.", "Dehqonobod t.", "Kasbi t.", "Kitob t.", "Koson t.", "Mirishkor t.", "Muborak t.", "Nishon t.", "Chiroqchi t.", "Ko'kdala t.", "Kamashi t.", "Yakkabog' t."],
-    "Samarqand viloyati": ["Samarqand sh.", "Samarqand t.", "Oqdaryo t.", "Bulung'ur t.", "Jomboy t.", "Ishtixon t.", "Kattaqo'rg'on sh.", "Kattaqo'rg'on t.", "Qo'shrabot t.", "Narpay t.", "Nurobod t.", "Payariq t.", "Pasdarg'om t.", "Paxtachi t.", "Toyloq t.", "Urgut t."],
-    "Sirdaryo viloyati": ["Guliston sh.", "Guliston t.", "Shirin sh.", "Yangiyer sh.", "Boyovut t.", "Oqoltin t.", "Sardoba t.", "Sayxunobod t.", "Sirdaryo t.", "Xavast t.", "Mirzaobod t."],
-    "Surxondaryo viloyati": ["Termiz sh.", "Termiz t.", "Angor t.", "Boysun t.", "Denov t.", "Jarqo'rg'on t.", "Qiziriq t.", "Qumqo'rg'on t.", "Muzrabot t.", "Oltinsoy t.", "Sariosiyo t.", "Sherobod t.", "Sho'rchi t.", "Uzun t."],
-    "Toshkent shahri": ["Bektemir r.", "Chilonzor r.", "Yashnobod r.", "Mirobod r.", "Mirzo Ulug'bek r.", "Olmazor r.", "Sergeli r.", "Shayxontohur r.", "Uchtepa r.", "Yakkasaroy r.", "Yunusobod r.", "Yangihayot r."],
-    "Toshkent viloyati": ["Nurafshon sh.", "Angren sh.", "Olmaliq sh.", "Chirchiq sh.", "Bekobod sh.", "Bekobod t.", "Bo'tonliq t.", "Bo'ka t.", "Chinoz t.", "Qibray t.", "Ohangaron t.", "Parkent t.", "Piskent t.", "Quyi Chirchiq t.", "O'rtachirchiq t.", "Yangiyo'l t.", "Yuqori Chirchiq t.", "Zangiota t."],
-    "Qoraqalpog'iston": ["Nukus sh.", "Amudaryo t.", "Beruniy t.", "Chimboy t.", "Ellikqal'a t.", "Kegeyli t.", "Mo'ynoq t.", "Nukus t.", "Qonliko'l t.", "Qorauzaq t.", "Qo'ng'irot t.", "Shumanay t.", "Taxtako'pir t.", "To'rtko'l t.", "Xo'jayli t.", "Taxiatosh sh.", "Bo'zatov t."]
+    "Andijon viloyati": {
+        "Andijon shahar": ["Markaz", "Sanoat zonasi", "Yangi shahar"],
+        "Andijon tumani": ["Kuyganyor sh.", "Og'ullik", "Xartum", "Chunbosh"],
+        "Asaka tumani": ["Asaka sh.", "Kujgan", "Navkan", "Toshkan"],
+        "Baliqchi tumani": ["Baliqchi sh.", "Chinabad sh.", "Xo'jaabad"],
+        "Bo'ston tumani": ["Bo'z sh.", "Shaxrixonchek", "Xovos"],
+        "Buloqboshi tumani": [
+            "Buloqboshi sh. (Markaz)", 
+            "Andijon MFY", 
+            "Uchtepa MFY", 
+            "Kullas MFY", 
+            "Shirmonbuloq q.", 
+            "Nayman MFY", 
+            "Keltepa MFY", 
+            "Sarvontepa MFY", 
+            "Tog'liq MFY"
+        ],
+        "Izboskan tumani": ["Paytug' sh.", "Gurkirov", "Maygir"],
+        "Jalaquduq tumani": ["Oxunboboyev sh.", "Janubiy Olamushuk", "Ko'qon"],
+        "Marhamat tumani": ["Marhamat sh.", "Polvontosh sh.", "Qoraqo'rg'on"],
+        "Oltinko'l tumani": ["Oltinko'l q.", "Chinnaobod", "Bo'ston"],
+        "Paxtaobod tumani": ["Paxtaobod sh.", "Ko'qonboy", "Madaniyat"],
+        "Xo'jaobod tumani": [
+            "Xo'jaobod sh. (Markaz)", 
+            "Karnaychi MFY", 
+            "Qorabuloq MFY", 
+            "Uchko'cha MFY", 
+            "Mustahkam MFY", 
+            "Baxrin MFY", 
+            "Dilkushod ShFY", 
+            "Guliston sh.", 
+            "Ko'tarma sh.", 
+            "Manak sh.", 
+            "Xidirsha sh.", 
+            "Birlashgan q."
+        ],
+        "Shahrixon tumani": ["Shahrixon sh.", "Segaza", "Vodil"],
+        "Xonobod shahar": ["Xonobod sh.", "Xonobod q."]
+    },
+    "Buxoro viloyati": {"Buxoro sh.": ["Markaz"], "Buxoro t.": ["Galaosiyo sh."]},
+    "Farg'ona viloyati": {"Farg'ona sh.": ["Markaz"], "Marg'ilon sh.": ["Markaz"], "Qo'qon sh.": ["Markaz"]},
+    "Toshkent shahri": {"Chilonzor r.": ["Markaz"], "Yunusobod r.": ["Markaz"]}
 }
 
 REG_KEYS = list(REGIONS.keys())
@@ -58,9 +76,9 @@ REG_KEYS = list(REGIONS.keys())
 # HOLATLAR (STATES)
 (
     LANG, ROLE,
-    C_REGION, C_DISTRICT, C_TARGET, C_DESC, C_TIME, C_PHONE, C_LOCATION, C_CONFIRM,
-    W_REGION, W_DISTRICT, W_NAME, W_CAR_MODEL, W_CAR_COLOR, W_CAR_NUMBER, W_PHONE, W_CONFIRM
-) = range(18)
+    C_REGION, C_DISTRICT, C_SUB_DISTRICT, C_TARGET, C_DESC, C_TIME, C_PHONE, C_LOCATION, C_CONFIRM,
+    W_REGION, W_DISTRICT, W_SUB_DISTRICT, W_NAME, W_CAR_MODEL, W_CAR_COLOR, W_CAR_NUMBER, W_PHONE, W_CONFIRM
+) = range(20)
 
 DATA_FILE = "bot_data.json"
 
@@ -79,6 +97,7 @@ def load_data():
     return {}, {}, [1]
 
 def save_data():
+    global workers, orders, order_counter
     try:
         with open(DATA_FILE, "w", encoding="utf-8") as f:
             json.dump({"workers": workers, "orders": orders, "order_counter": order_counter}, f, ensure_ascii=False, indent=4)
@@ -102,12 +121,12 @@ def driver_menu_keyboard(lang="uz"):
     if lang == "uz":
         return ReplyKeyboardMarkup([
             [KeyboardButton("🔍 Buyurtmalarni qidirish")],
-            [KeyboardButton("💳 Shaxsiy Kabinet (Haydovchilar)"), KeyboardButton("ℹ️ Yordam / Ma'lumot")]
+            [KeyboardButton("💳 Shaxsiy Kabinet"), KeyboardButton("ℹ️ Yordam / Ma'lumot")]
         ], resize_keyboard=True)
     else:
         return ReplyKeyboardMarkup([
             [KeyboardButton("🔍 Поиск заказов")],
-            [KeyboardButton("💳 Личный кабинет (Водители)"), KeyboardButton("ℹ️ Помощь / Информация")]
+            [KeyboardButton("💳 Личный кабинет"), KeyboardButton("ℹ️ Помощь / Информация")]
         ], resize_keyboard=True)
 
 def regions_keyboard(prefix="reg_"):
@@ -123,7 +142,7 @@ def regions_keyboard(prefix="reg_"):
 
 def districts_keyboard(region_idx, prefix="dist_", back_callback="back_region"):
     region_name = REG_KEYS[int(region_idx)]
-    districts = REGIONS.get(region_name, [])
+    districts = list(REGIONS.get(region_name, {}).keys())
     kb = []
     row = []
     for d_idx, d in enumerate(districts):
@@ -132,7 +151,20 @@ def districts_keyboard(region_idx, prefix="dist_", back_callback="back_region"):
             kb.append(row)
             row = []
     if row: kb.append(row)
-    kb.append([InlineKeyboardButton("🔙 Orqaga / Назад", callback_data=back_callback)])
+    kb.append([InlineKeyboardButton("🔙 Orqaga", callback_data=back_callback)])
+    return InlineKeyboardMarkup(kb)
+
+def sub_districts_keyboard(region_name, district_name, prefix="sub_", back_callback="back_dist"):
+    sub_districts = REGIONS.get(region_name, {}).get(district_name, [])
+    kb = []
+    row = []
+    for s_idx, s in enumerate(sub_districts):
+        row.append(InlineKeyboardButton(s, callback_data=f"{prefix}{s_idx}"))
+        if len(row) == 2:
+            kb.append(row)
+            row = []
+    if row: kb.append(row)
+    kb.append([InlineKeyboardButton("🔙 Orqaga", callback_data=back_callback)])
     return InlineKeyboardMarkup(kb)
 
 # ===================== START QISMI =====================
@@ -144,32 +176,17 @@ async def start(update: Update, context):
         w = workers[uid]
         lang = w.get("lang", "uz")
         context.user_data["lang"] = lang 
-        
         if w.get("approved"):
-            if lang == "uz":
-                await msg.reply_text("<b>Xush kelibsiz, haydovchi!</b>\nSiz tizimda mavjudsiz. Balans va hisobingiz tiklandi.", reply_markup=driver_menu_keyboard("uz"), parse_mode="HTML")
-            else:
-                await msg.reply_text("<b>Добро пожаловать, водитель!</b>\nВы уже есть в системе. Ваш баланс и данные восстановлены.", reply_markup=driver_menu_keyboard("ru"), parse_mode="HTML")
+            await msg.reply_text("<b>Xush kelibsiz, haydovchi!</b>", reply_markup=driver_menu_keyboard(lang), parse_mode="HTML")
             return ConversationHandler.END
         else:
-            if lang == "uz":
-                await msg.reply_text("<b>Sizning arizangiz hali ko'rib chiqilmoqda.</b>\nAdmin tasdiqlashini kuting.", parse_mode="HTML")
-            else:
-                await msg.reply_text("<b>Ваша заявка все еще на рассмотрении.</b>\nПожалуйста, дождитесь подтверждения админа.", parse_mode="HTML")
+            await msg.reply_text("<b>Sizning arizangiz hali ko'rib chiqilmoqda.</b>", parse_mode="HTML")
             return ConversationHandler.END
 
+    # user_data ni tozalaymiz lekin tilni xavfsiz saqlash uchun to'liq o'chirmaymiz
     context.user_data.clear() 
-
-    kb = [
-        [InlineKeyboardButton("🇺🇿 O'ZBEKCHA", callback_data="lang_uz")],
-        [InlineKeyboardButton("🇷🇺 РУССКИЙ", callback_data="lang_ru")]
-    ]
-    await msg.reply_text(
-        "✨ <b>Labo yuk tashish xizmatiga xush kelibsiz! / Добро пожаловать в службу грузоперевозок Labo!</b>\n\n"
-        "Davom etish uchun tilni tanlang:\nВыберите язык для продолжения:", 
-        reply_markup=InlineKeyboardMarkup(kb), 
-        parse_mode="HTML"
-    )
+    kb = [[InlineKeyboardButton("🇺🇿 O'ZBEKCHA", callback_data="lang_uz")], [InlineKeyboardButton("🇷🇺 РУССКИЙ", callback_data="lang_ru")]]
+    await msg.reply_text("✨ <b>Xush kelibsiz!</b>\nTilni tanlang / Выберите язык:", reply_markup=InlineKeyboardMarkup(kb), parse_mode="HTML")
     return LANG
 
 async def select_lang(update: Update, context):
@@ -178,18 +195,11 @@ async def select_lang(update: Update, context):
     lang = query.data.split("_")[1]
     context.user_data["lang"] = lang
     
-    if lang == "uz":
-        kb = [
-            [InlineKeyboardButton("Mijoz (Yuk yuborish) 📦", callback_data="role_client")],
-            [InlineKeyboardButton("Labochi (Haydovchi bo'lib ro'yxatdan o'tish) 🛺", callback_data="role_worker")],
-        ]
-        await query.edit_message_text("Botdan qanday maqsadda foydalanmoqchisiz? Tanlang:", reply_markup=InlineKeyboardMarkup(kb))
-    else:
-        kb = [
-            [InlineKeyboardButton("Клиент (Отправить груз) 📦", callback_data="role_client")],
-            [InlineKeyboardButton("Водитель (Регистрация как водитель) 🛺", callback_data="role_worker")],
-        ]
-        await query.edit_message_text("С какой целью вы используете бота? Выберите:", reply_markup=InlineKeyboardMarkup(kb))
+    kb = [
+        [InlineKeyboardButton("Mijoz (Yuk yuborish) 📦" if lang=="uz" else "Клиент 📦", callback_data="role_client")],
+        [InlineKeyboardButton("Haydovchi (Ro'yxatdan o'tish) 🛺" if lang=="uz" else "Водитель 🛺", callback_data="role_worker")]
+    ]
+    await query.edit_message_text("Botdan foydalanish rolini tanlang:", reply_markup=InlineKeyboardMarkup(kb))
     return ROLE
 
 async def role_sel(update: Update, context):
@@ -200,30 +210,22 @@ async def role_sel(update: Update, context):
     lang = context.user_data.get("lang", "uz")
     
     if role == "client":
-        if lang == "uz":
-            await context.bot.send_message(chat_id=query.from_user.id, text="Siz Mijoz menyusiga o'tdingiz. Pastdagi tugma orqali buyurtma berishingiz mumkin.", reply_markup=client_menu_keyboard("uz"))
-            await query.edit_message_text("Yuk qayerdan olinadi? Viloyatni tanlang:", reply_markup=regions_keyboard("reg_"))
-        else:
-            await context.bot.send_message(chat_id=query.from_user.id, text="Вы перешли в меню Клиента. Вы можете оформить заказ с помощью кнопки ниже.", reply_markup=client_menu_keyboard("ru"))
-            await query.edit_message_text("Откуда забрать груз? Выберите область:", reply_markup=regions_keyboard("reg_"))
+        await context.bot.send_message(chat_id=query.from_user.id, text="Mijoz menyusi faollashdi.", reply_markup=client_menu_keyboard(lang))
+        await query.edit_message_text("Yuk qayerdan olinadi? Viloyatni tanlang:", reply_markup=regions_keyboard("reg_"))
         return C_REGION
     else:
-        if lang == "uz":
-            await query.edit_message_text("Haydovchi sifatida ro'yxatdan o'tish.\nSiz qaysi hududda yuk tashiysiz? Viloyatni tanlang:", reply_markup=regions_keyboard("wreg_"))
-        else:
-            await query.edit_message_text("Регистрация в качестве водителя.\nВ каком регионе вы перевозите грузы? Выберите область:", reply_markup=regions_keyboard("wreg_"))
+        await query.edit_message_text("Haydovchi ro'yxatdan o'tish oynasi.\nViloyatni tanlang:", reply_markup=regions_keyboard("wreg_"))
         return W_REGION
 
 # ===================== MIJOZ OQIMI =====================
 async def start_client_order(update: Update, context):
+    lang = context.user_data.get("lang", "uz")
+    if update.message and update.message.text:
+        if "Отправить" in update.message.text:
+            lang = "ru"
     context.user_data.clear()
-    context.user_data["lang"] = "uz" if "Yuk" in update.message.text else "ru"
-    lang = context.user_data["lang"]
-    
-    if lang == "uz":
-        await update.message.reply_text("Yuk qayerdan olinadi? Viloyatni tanlang:", reply_markup=regions_keyboard("reg_"))
-    else:
-        await update.message.reply_text("Откуда забрать груз? Выберите область:", reply_markup=regions_keyboard("reg_"))
+    context.user_data["lang"] = lang
+    await update.message.reply_text("Yuk qayerdan olinadi? Viloyatni tanlang:", reply_markup=regions_keyboard("reg_"))
     return C_REGION
 
 async def c_region(update: Update, context):
@@ -232,153 +234,107 @@ async def c_region(update: Update, context):
     reg_idx = query.data.replace("reg_", "")
     context.user_data["c_region_idx"] = reg_idx
     context.user_data["c_region"] = REG_KEYS[int(reg_idx)]
-    lang = context.user_data.get("lang", "uz")
     
-    if lang == "uz":
-        await query.edit_message_text(f"Tanlangan viloyat: {context.user_data['c_region']}\nTumanni tanlang:", reply_markup=districts_keyboard(reg_idx, "dist_", "back_region"))
-    else:
-        await query.edit_message_text(f"Выбранная область: {context.user_data['c_region']}\nВыберите район:", reply_markup=districts_keyboard(reg_idx, "dist_", "back_region"))
+    await query.edit_message_text(f"Viloyat: {context.user_data['c_region']}\nTumanni tanlang:", reply_markup=districts_keyboard(reg_idx, "dist_", "back_region"))
     return C_DISTRICT
 
 async def c_district(update: Update, context):
     query = update.callback_query
     await query.answer()
-    lang = context.user_data.get("lang", "uz")
     
     if query.data == "back_region":
-        if lang == "uz":
-            await query.edit_message_text("Yuk qayerdan olinadi? Viloyatni tanlang:", reply_markup=regions_keyboard("reg_"))
-        else:
-            await query.edit_message_text("Откуда забрать груз? Выберите область:", reply_markup=regions_keyboard("reg_"))
+        await query.edit_message_text("Viloyatni tanlang:", reply_markup=regions_keyboard("reg_"))
         return C_REGION
         
     d_idx = int(query.data.replace("dist_", ""))
-    reg_idx = context.user_data["c_region_idx"]
-    context.user_data["c_district"] = REGIONS[REG_KEYS[int(reg_idx)]][d_idx]
+    reg_name = context.user_data["c_region"]
+    dist_name = list(REGIONS[reg_name].keys())[d_idx]
+    context.user_data["c_district"] = dist_name
     
-    if lang == "uz":
-        await query.edit_message_text("🏁 <b>Aniq manzilni batafsil kiriting:</b>\n\nYuk qayerdan olinadi va qayerga boradi? (Yozib yuboring):", parse_mode="HTML")
-    else:
-        await query.edit_message_text("🏁 <b>Введите точный адрес подробно:</b>\n\nОткуда забрать груз и куда его доставить? (Отправьте текстом):", parse_mode="HTML")
+    await query.edit_message_text(f"Tuman: {dist_name}\n🏠 Qishloq, shaharcha yoki mahallani tanlang:", reply_markup=sub_districts_keyboard(reg_name, dist_name, "csub_", "back_dist"))
+    return C_SUB_DISTRICT
+
+async def c_sub_district(update: Update, context):
+    query = update.callback_query
+    await query.answer()
+    
+    if query.data == "back_dist":
+        reg_idx = context.user_data["c_region_idx"]
+        await query.edit_message_text("Tumanni tanlang:", reply_markup=districts_keyboard(reg_idx, "dist_", "back_region"))
+        return C_DISTRICT
+        
+    s_idx = int(query.data.replace("csub_", ""))
+    reg_name = context.user_data["c_region"]
+    dist_name = context.user_data["c_district"]
+    sub_name = REGIONS[reg_name][dist_name][s_idx]
+    context.user_data["c_sub_district"] = sub_name
+    
+    await query.edit_message_text("🏁 <b>Aniq manzilni batafsil kiriting:</b>\n\nYuk qayerdan olinadi va qayerga boradi? (Matn ko'rinishida yozing):", parse_mode="HTML")
     return C_TARGET
 
 async def c_target(update: Update, context):
-    lang = context.user_data.get("lang", "uz")
-    if not update.message or not update.message.text:
-        msg = "Iltimos, manzilni matn ko'rinishida yozing:" if lang == "uz" else "Пожалуйста, введите адрес в текстовом формате:"
-        await update.message.reply_text(msg)
-        return C_TARGET
-    context.user_data["c_target"] = update.message.text
-    
-    if lang == "uz":
-        kb = [[KeyboardButton("📺 Texnikalar"), KeyboardButton("🦮 Hayvonlar")], [KeyboardButton("🧱 Qurilish mollari"), KeyboardButton("📦 Boshqa narsalar")]]
-        await update.message.reply_text("📦 Yukingiz qaysi turga kiradi?", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True, one_time_keyboard=True))
-    else:
-        kb = [[KeyboardButton("📺 Техника"), KeyboardButton("🦮 Животные")], [KeyboardButton("🧱 Стройматериалы"), KeyboardButton("📦 Другое")]]
-        await update.message.reply_text("📦 К какому типу относится ваш груз?", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True, one_time_keyboard=True))
+    context.user_data["c_target"] = update.message.text if update.message.text else "Ko'rsatilmagan"
+    kb = [[KeyboardButton("📺 Texnikalar"), KeyboardButton("🦮 Hayvonlar")], [KeyboardButton("🧱 Qurilish mollari"), KeyboardButton("📦 Boshqa narsalar")]]
+    await update.message.reply_text("📦 Yukingiz qaysi turga kiradi?", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True, one_time_keyboard=True))
     return C_DESC
 
 async def c_desc(update: Update, context):
-    lang = context.user_data.get("lang", "uz")
-    if not update.message or not update.message.text:
-        msg = "Yuk turini yozing yoki tanlang:" if lang == "uz" else "Выберите или введите тип груза:"
-        await update.message.reply_text(msg)
-        return C_DESC
-    context.user_data["c_desc"] = update.message.text
-    
-    if lang == "uz":
-        kb = [[KeyboardButton("⚡️ Hozir / Tezda")], [KeyboardButton("📅 Bugun kechroq"), KeyboardButton("📞 Kelishiladi")]]
-        await update.message.reply_text("🕒 Yuk qachon olib ketilishi kerak?", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True, one_time_keyboard=True))
-    else:
-        kb = [[KeyboardButton("⚡️ Сейчас / Срочно")], [KeyboardButton("📅 Сегодня позже"), KeyboardButton("📞 По согласованию")]]
-        await update.message.reply_text("🕒 Когда нужно забрать груз?", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True, one_time_keyboard=True))
+    context.user_data["c_desc"] = update.message.text if update.message.text else "Boshqa"
+    kb = [[KeyboardButton("⚡️ Hozir / Tezda")], [KeyboardButton("📅 Bugun kechroq"), KeyboardButton("📞 Kelishiladi")]]
+    await update.message.reply_text("🕒 Yuk qachon olib ketilishi kerak?", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True, one_time_keyboard=True))
     return C_TIME
 
+async def c_desc_fallback(update: Update, context):
+    await update.message.reply_text("Iltimos, yuk turini tugmalardan tanlang yoki matn ko'rinishida yozing.")
+    return C_DESC
+
 async def c_time(update: Update, context):
-    lang = context.user_data.get("lang", "uz")
-    if not update.message or not update.message.text:
-        msg = "Iltimos, vaqtni kiriting:" if lang == "uz" else "Пожалуйста, введите время:"
-        await update.message.reply_text(msg)
-        return C_TIME
-    context.user_data["c_time"] = update.message.text
-    
-    if lang == "uz":
-        kb = [[KeyboardButton("📱 Telefon raqamni yuborish", request_contact=True)]]
-        await update.message.reply_text("📞 Telefon raqamingizni kiriting yoki pastdagi tugmani bosing:", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True, one_time_keyboard=True))
-    else:
-        kb = [[KeyboardButton("📱 Отправить номер телефона", request_contact=True)]]
-        await update.message.reply_text("📞 Введите ваш номер телефона или нажмите кнопку ниже:", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True, one_time_keyboard=True))
+    context.user_data["c_time"] = update.message.text if update.message.text else "Kelishiladi"
+    kb = [[KeyboardButton("📱 Telefon raqamni yuborish", request_contact=True)]]
+    await update.message.reply_text("📞 Telefon raqamingizni yuboring yoki kiriting:", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True, one_time_keyboard=True))
     return C_PHONE
 
 async def c_phone(update: Update, context):
-    lang = context.user_data.get("lang", "uz")
-    if update.message.contact: 
+    if update.message.contact:
         phone = update.message.contact.phone_number
-    elif update.message.text: 
+    else:
         phone = update.message.text
-    else:
-        msg = "Iltimos, telefon raqamni yuboring:" if lang == "uz" else "Пожалуйста, отправьте номер телефона:"
-        await update.message.reply_text(msg)
-        return C_PHONE
     context.user_data["c_phone"] = phone
-    
-    if lang == "uz":
-        kb = [[KeyboardButton("📍 Joylashuvni yuborish", request_location=True)]]
-        await update.message.reply_text("Yuk turgan joyning lokatsiyasini yuboring (yoki matn qilib yozing):", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True, one_time_keyboard=True))
-    else:
-        kb = [[KeyboardButton("📍 Отправить геолокацию", request_location=True)]]
-        await update.message.reply_text("Отправьте геолокацию груза (или напишите текстом):", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True, one_time_keyboard=True))
+    kb = [[KeyboardButton("📍 Joylashuvni yuborish", request_location=True)]]
+    await update.message.reply_text("Yuk lokatsiyasini yuboring (yoki matn yozing):", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True, one_time_keyboard=True))
     return C_LOCATION
 
 async def c_location(update: Update, context):
-    lang = context.user_data.get("lang", "uz")
     if update.message.location:
         lat, lon = update.message.location.latitude, update.message.location.longitude
         context.user_data["c_location_text"] = f"http://maps.google.com/?q={lat},{lon}"
-    elif update.message.text:
-        context.user_data["c_location_text"] = update.message.text
     else:
-        msg = "Iltimos, lokatsiya yuboring:" if lang == "uz" else "Пожалуйста, отправьте локацию:"
-        await update.message.reply_text(msg)
-        return C_LOCATION
+        context.user_data["c_location_text"] = update.message.text if update.message.text else "Lokatsiya berilmagan"
 
     data = context.user_data
-    if lang == "uz":
-        text = (
-            f"📋 <b>ARIZANGIZ TAYYOR:</b>\n\n"
-            f"📍 Hudud: {data.get('c_region')}, {data.get('c_district')}\n"
-            f"🏁 Aniq Manzil: {data.get('c_target')}\n"
-            f"📦 Yuk turi: {data.get('c_desc')}\n"
-            f"🕒 Vaqt: {data.get('c_time')}\n"
-            f"📞 Telefon: {data.get('c_phone')}\n"
-            f"🗺 Lokatsiya: {data.get('c_location_text')}\n\n"
-            f"Arizani tasdiqlaysizmi?"
-        )
-        kb = [[InlineKeyboardButton("✅ Tasdiqlash", callback_data="c_confirm")], [InlineKeyboardButton("❌ Bekor qilish", callback_data="c_cancel")]]
-    else:
-        text = (
-            f"📋 <b>ВАША ЗАЯВКА ГОТОВА:</b>\n\n"
-            f"📍 Регион: {data.get('c_region')}, {data.get('c_district')}\n"
-            f"🏁 Точный адрес: {data.get('c_target')}\n"
-            f"📦 Тип груза: {data.get('c_desc')}\n"
-            f"🕒 Время: {data.get('c_time')}\n"
-            f"📞 Телефoн: {data.get('c_phone')}\n"
-            f"🗺 Локация: {data.get('c_location_text')}\n\n"
-            f"Вы подтверждаете заявку?"
-        )
-        kb = [[InlineKeyboardButton("✅ Подтвердить", callback_data="c_confirm")], [InlineKeyboardButton("❌ Отменить", callback_data="c_cancel")]]
-        
+    text = (
+        f"📋 <b>ARIZANGIZ TAYYOR:</b>\n\n"
+        f"📍 Hudud: {data.get('c_region')}, {data.get('c_district')}, {data.get('c_sub_district')}\n"
+        f"🏁 Aniq Manzil: {data.get('c_target')}\n"
+        f"📦 Yuk turi: {data.get('c_desc')}\n"
+        f"🕒 Vaqt: {data.get('c_time')}\n"
+        f"📞 Telefon: {data.get('c_phone')}\n"
+        f"🗺 Lokatsiya: {data.get('c_location_text')}\n\n"
+        f"Arizani tasdiqlaysizmi?"
+    )
+    kb = [[InlineKeyboardButton("✅ Tasdiqlash", callback_data="c_confirm")], [InlineKeyboardButton("❌ Bekor qilish", callback_data="c_cancel")]]
     await update.message.reply_text(text, reply_markup=InlineKeyboardMarkup(kb), parse_mode="HTML")
     return C_CONFIRM
 
 async def c_confirm(update: Update, context):
     query = update.callback_query
     await query.answer()
+    global order_counter, orders, workers
+    
     lang = context.user_data.get("lang", "uz")
     
     if query.data == "c_cancel":
-        msg = "Ariza bekor qilindi." if lang == "uz" else "Заявка отменена."
-        await query.edit_message_text(msg)
+        await query.edit_message_text("Ariza bekor qilindi.")
         return ConversationHandler.END
 
     uid = query.from_user.id
@@ -387,43 +343,29 @@ async def c_confirm(update: Update, context):
     order_counter[0] += 1
 
     orders[oid] = {
-        "id": oid, "client_id": uid, "region": data.get("c_region"), "district": data.get("c_district"),
+        "id": oid, "client_id": uid, "region": data.get("c_region"), "district": data.get("c_district"), "sub_district": data.get("c_sub_district"),
         "desc": data.get("c_desc"), "target": data.get("c_target"), "time": data.get("c_time"), 
         "phone": data.get("c_phone"), "location_text": data.get("c_location_text"), 
         "status": "pending", "worker_id": None, "client_msg_id": None, "driver_messages": [], "client_lang": lang
     }
     save_data()
 
-    if lang == "uz":
-        kb = [[InlineKeyboardButton("❌ Buyurtmani bekor qilish", callback_data=f"client_cancel_{oid}")]]
-        msg_text = f"⏳ <b>Ariza #{oid} haydovchilarga yuborildi!</b>\n\nHaydovchi qabul qilsa, uning ma'lumotlarini shu yerda ko'rasiz."
-    else:
-        kb = [[InlineKeyboardButton("❌ Отменить заказ", callback_data=f"client_cancel_{oid}")]]
-        msg_text = f"⏳ <b>Заявка #{oid} отправлена водителям!</b>\n\nКак только водитель примет её, вы увидите его данные здесь."
-
-    sent_msg = await query.edit_message_text(msg_text, reply_markup=InlineKeyboardMarkup(kb), parse_mode="HTML")
+    kb = [[InlineKeyboardButton("❌ Buyurtmani bekor qilish", callback_data=f"client_cancel_{oid}")]]
+    sent_msg = await query.edit_message_text(f"⏳ <b>Ariza #{oid} haydovchilarga yuborildi!</b>\n\nAynan siz tanlagan qishloq/mahalla haydovchilariga xabar ketdi.", reply_markup=InlineKeyboardMarkup(kb), parse_mode="HTML")
     orders[oid]["client_msg_id"] = sent_msg.message_id 
 
     for wid, w in workers.items():
-        if w.get("approved") and data.get("c_region") == w.get("region") and w.get("district") == data.get("c_district"):
+        if w.get("approved") and data.get("c_region") == w.get("region") and w.get("district") == data.get("c_district") and w.get("sub_district") == w.get("sub_district"):
             if w.get("balance", 0) >= FIXED_COMMISSION:
-                drv_lang = w.get("lang", "uz")
-                btn_text = f"🛺 Qabul qilish ({FIXED_COMMISSION:,} so'm)" if drv_lang == "uz" else f"🛺 Принять ({FIXED_COMMISSION:,} сум)"
-                drv_kb = [[InlineKeyboardButton(btn_text, callback_data=f"accept_{oid}")]]
-                
-                title = f"🔔 <b>YANGI BUYURTMA #{oid}!</b>" if drv_lang == "uz" else f"🔔 <b>НОВЫЙ ЗАКАЗ #{oid}!</b>"
-                addr_label = "📍 Hudud:" if drv_lang == "uz" else "📍 Регион:"
-                target_label = "🏁 Manzil:" if drv_lang == "uz" else "🏁 Адрес:"
-                desc_label = "📦 Turi:" if drv_lang == "uz" else "📦 Тип:"
-                time_label = "🕒 Vaqt:" if drv_lang == "uz" else "🕒 Время:"
-                
+                drv_kb = [[InlineKeyboardButton(f"🛺 Qabul qilish ({FIXED_COMMISSION:,} so'm)", callback_data=f"accept_{oid}")]]
                 try:
                     d_msg = await context.bot.send_message(
                         wid,
-                        f"{title}\n\n"
-                        f"{addr_label} {data.get('c_region')}, {data.get('c_district')}\n"
-                        f"{target_label} {data.get('c_target')}\n"
-                        f"{desc_label} {data.get('c_desc')} | {time_label} {data.get('c_time')}",
+                        f"🔔 <b>YANGI HUDUDIY BUYURTMA #{oid}!</b>\n\n"
+                        f"📍 {data.get('c_region')}, {data.get('c_district')}\n"
+                        f"🏡 Qishloq/Mahalla: {data.get('c_sub_district')}\n"
+                        f"🏁 Manzil: {data.get('c_target')}\n"
+                        f"📦 Turi: {data.get('c_desc')} | {data.get('c_time')}",
                         reply_markup=InlineKeyboardMarkup(drv_kb), parse_mode="HTML"
                     )
                     orders[oid]["driver_messages"].append({"chat_id": int(wid), "message_id": d_msg.message_id})
@@ -432,130 +374,72 @@ async def c_confirm(update: Update, context):
     save_data()
     return ConversationHandler.END
 
-# ===================== QIDIRISH VA YANGILASH TIZIMI =====================
+# ===================== HAYDOVCHILAR QIDIRUVI =====================
 async def search_orders_cmd(update: Update, context):
+    global orders, workers
     uid = update.effective_user.id
-    if uid not in workers or not workers[uid].get("approved"):
-        await update.message.reply_text("Siz tasdiqlangan haydovchi emassiz. / Вы не являетесь одобренным водителем.")
-        return
+    if uid not in workers or not workers[uid].get("approved"): return
 
     w = workers[uid]
-    drv_lang = w.get("lang", "uz")
     hr_region = w.get("region")
     hr_district = w.get("district")
+    hr_sub = w.get("sub_district")
 
     found_orders = []
     for oid, o in orders.items():
-        if o["status"] == "pending" and o["region"] == hr_region and o["district"] == hr_district:
+        if o["status"] == "pending" and o["region"] == hr_region and o["district"] == hr_district and o.get("sub_district") == hr_sub:
             found_orders.append(o)
 
     if not found_orders:
-        if drv_lang == "uz":
-            kb = [[InlineKeyboardButton("🔄 Yangilash", callback_data="refresh_search")]]
-            text = f"📍 <b>{hr_region}, {hr_district}</b> hududida hozircha faol buyurtmalar topilmadi.\n\nYangi buyurtmalarni tekshirish uchun pastdagi tugmani bosing:"
-        else:
-            kb = [[InlineKeyboardButton("🔄 Обновить", callback_data="refresh_search")]]
-            text = f"📍 В регионе <b>{hr_region}, {hr_district}</b> активных заказов пока не найдено.\n\nНажмите кнопку ниже, чтобы проверить новые заказы:"
-            
-        await update.message.reply_text(text, reply_markup=InlineKeyboardMarkup(kb), parse_mode="HTML")
+        kb = [[InlineKeyboardButton("🔄 Yangilash", callback_data="refresh_search")]]
+        await update.message.reply_text(f"📍 <b>{hr_sub}</b> hududida hozircha faol buyurtmalar topilmadi.", reply_markup=InlineKeyboardMarkup(kb), parse_mode="HTML")
         return
 
-    title = f"🔍 <b>Sizning hududingizdagi faol buyurtmalar ({len(found_orders)} ta):</b>" if drv_lang == "uz" else f"🔍 <b>Активные заказы в вашем регионе ({len(found_orders)} шт):</b>"
-    await update.message.reply_text(title, parse_mode="HTML")
-    
+    await update.message.reply_text(f"🔍 <b>Sizning qishlog'ingizdagi buyurtmalar ({len(found_orders)} ta):</b>", parse_mode="HTML")
     for o in found_orders:
-        btn_text = f"🛺 Qabul qilish ({FIXED_COMMISSION:,} so'm)" if drv_lang == "uz" else f"🛺 Принять ({FIXED_COMMISSION:,} сум)"
-        drv_kb = [[InlineKeyboardButton(btn_text, callback_data=f"accept_{o['id']}")]]
-        
-        b_label = f"📦 <b>BUYURTMA #{o['id']}</b>" if drv_lang == "uz" else f"📦 <b>ЗАКАЗ #{o['id']}</b>"
-        m_label = "🏁 Manzil:" if drv_lang == "uz" else "🏁 Адрес:"
-        t_label = "📦 Turi:" if drv_lang == "uz" else "📦 Тип:"
-        v_label = "🕒 Vaqt:" if drv_lang == "uz" else "🕒 Время:"
-        
-        await update.message.reply_text(
-            f"{b_label}\n"
-            f"{m_label} {o['target']}\n"
-            f"{t_label} {o['desc']}\n"
-            f"{v_label} {o['time']}",
-            reply_markup=InlineKeyboardMarkup(drv_kb), parse_mode="HTML"
-        )
+        drv_kb = [[InlineKeyboardButton(f"🛺 Qabul qilish", callback_data=f"accept_{o['id']}")]]
+        await update.message.reply_text(f"📦 <b>BUYURTMA #{o['id']} ({o.get('sub_district')})</b>\n🏁 Manzil: {o['target']}\n📦 Turi: {o['desc']}", reply_markup=InlineKeyboardMarkup(drv_kb), parse_mode="HTML")
 
 async def refresh_search_callback(update: Update, context):
     query = update.callback_query
     await query.answer()
+    global orders, workers
     uid = query.from_user.id
     w = workers.get(uid)
     if not w: return
 
-    drv_lang = w.get("lang", "uz")
-    hr_region = w.get("region")
-    hr_district = w.get("district")
-
-    found_orders = []
-    for oid, o in orders.items():
-        if o["status"] == "pending" and o["region"] == hr_region and o["district"] == hr_district:
-            found_orders.append(o)
+    found_orders = [o for o in orders.values() if o["status"] == "pending" and o["region"] == w["region"] and o["district"] == w["district"] and o.get("sub_district") == w["sub_district"]]
 
     if not found_orders:
         try:
-            if drv_lang == "uz":
-                kb = [[InlineKeyboardButton("🔄 Qayta yangilash", callback_data="refresh_search")]]
-                text = f"⏳ Oxirgi tekshiruv: <b>Hozir</b>\n📍 Hudud: {hr_region}, {hr_district}\n\nHech qanday yangi buyurtma topilmadi. Kutishingiz yoki qayta urinib ko'rishingiz mumkin."
-            else:
-                kb = [[InlineKeyboardButton("🔄 Повторить обновление", callback_data="refresh_search")]]
-                text = f"⏳ Последняя проверка: <b>Только что</b>\n📍 Регион: {hr_region}, {hr_district}\n\nНовых заказов не найдено. Вы можете подождать или попробовать еще раз."
-            await query.edit_message_text(text, reply_markup=InlineKeyboardMarkup(kb), parse_mode="HTML")
+            kb = [[InlineKeyboardButton("🔄 Qayta yangilash", callback_data="refresh_search")]]
+            await query.edit_message_text(f"⏳ Yangilik yo'q.\nHudud: {w['sub_district']}", reply_markup=InlineKeyboardMarkup(kb), parse_mode="HTML")
         except Exception: pass
         return
 
-    success_msg = "✅ Yangi buyurtmalar topildi! Pastda ko'rishingiz mumkin:" if drv_lang == "uz" else "✅ Найдены новые заказы! Вы можете увидеть их ниже:"
-    await query.edit_message_text(success_msg)
-    
+    await query.edit_message_text("✅ Yangi buyurtmalar bor!")
     for o in found_orders:
-        btn_text = f"🛺 Qabul qilish ({FIXED_COMMISSION:,} so'm)" if drv_lang == "uz" else f"🛺 Принять ({FIXED_COMMISSION:,} сум)"
-        drv_kb = [[InlineKeyboardButton(btn_text, callback_data=f"accept_{o['id']}")]]
-        
-        b_label = f"📦 <b>BUYURTMA #{o['id']}</b>" if drv_lang == "uz" else f"📦 <b>ЗАКАЗ #{o['id']}</b>"
-        m_label = "🏁 Manzil:" if drv_lang == "uz" else "🏁 Адрес:"
-        t_label = "📦 Turi:" if drv_lang == "uz" else "📦 Тип:"
-        v_label = "🕒 Vaqt:" if drv_lang == "uz" else "🕒 Время:"
-        
-        await context.bot.send_message(
-            chat_id=uid,
-            text=f"{b_label}\n"
-                 f"{m_label} {o['target']}\n"
-                 f"{t_label} {o['desc']}\n"
-                 f"{v_label} {o['time']}",
-            reply_markup=InlineKeyboardMarkup(drv_kb), parse_mode="HTML"
-        )
+        drv_kb = [[InlineKeyboardButton("🛺 Qabul qilish", callback_data=f"accept_{o['id']}")]]
+        await context.bot.send_message(chat_id=uid, text=f"📦 <b>#{o['id']}</b>\n Manzil: {o['target']}", reply_markup=InlineKeyboardMarkup(drv_kb))
 
-# ===================== BUYURTMANI QABUL QILISH =====================
+# ===================== BUYURTMANI PASSPORT/PROCESSI =====================
 async def accept_order(update: Update, context):
     query = update.callback_query
     await query.answer()
+    global orders, workers
     oid = int(query.data.split("_")[1])
     uid = query.from_user.id
 
-    if oid not in orders:
-        await query.edit_message_text("Buyurtma topilmadi / Заказ не найден.")
-        return
-    
+    if oid not in orders: return
     order = orders[oid]
     w = workers.get(uid)
-    drv_lang = w.get("lang", "uz") if w else "uz"
     
-    if order["status"] in ["cancelled_by_client", "cancelled_after_accept"]:
-        msg = "Buyurtma bekor qilingan. 😔" if drv_lang == "uz" else "Заказ отменен. 😔"
-        await query.edit_message_text(msg)
-        return
     if order["status"] != "pending":
-        msg = "Kechikdingiz, boshqa haydovchi qabul qildi." if drv_lang == "uz" else "Вы опоздали, другой водитель уже принял заказ."
-        await query.edit_message_text(msg)
+        await query.edit_message_text("Kechikdingiz, buyurtma allaqachon olingan.")
         return
 
     if not w or w.get("balance", 0) < FIXED_COMMISSION:
-        msg = f"❌ <b>Sizda yetarli mablag' yo'q!</b>\n\nBalansingiz: {w.get('balance', 0):,} so'm." if drv_lang == "uz" else f"❌ <b>Недостаточно средств!</b>\n\nВаш баланс: {w.get('balance', 0):,} сум."
-        await context.bot.send_message(uid, msg, parse_mode="HTML")
+        await context.bot.send_message(uid, "❌ Balansda mablag' yetarli emas! Iltimos hisobingizni to'ldiring.")
         return
 
     order["status"] = "accepted"
@@ -564,171 +448,127 @@ async def accept_order(update: Update, context):
     w["total_orders"] += 1
     save_data()
 
-    btn_text = "❌ Buyurtmani bekor qilish (Voz kechish)" if drv_lang == "uz" else "❌ Отменить заказ (Отказ)"
-    drv_cancel_kb = [[InlineKeyboardButton(btn_text, callback_data=f"driver_cancel_{oid}")]]
-    
-    if drv_lang == "uz":
-        drv_text = (
-            f"🎉 <b>Buyurtma #{oid} sizniki!</b>\n💰 Balansdan 4,000 so'm yechildi.\n\n"
-            f"📞 Mijoz: {order['phone']}\n"
-            f"🏁 Manzil: {order['target']}\n"
-            f"📍 <a href='{order['location_text']}'>Lokatsiya xaritasi</a>\n\n"
-            f"⚠️ Agar bormasangiz quyidagi tugma orqali bekor qiling (pul qaytadi)."
-        )
-    else:
-        drv_text = (
-            f"🎉 <b>Заказ #{oid} ваш!</b>\n💰 С баланса списано 4,000 сум.\n\n"
-            f"📞 Клиент: {order['phone']}\n"
-            f"🏁 Адрес: {order['target']}\n"
-            f"📍 <a href='{order['location_text']}'>Карта локации</a>\n\n"
-            f"⚠️ Если вы не сможете поехать, отмените заказ (деньги вернутся)."
-        )
-
-    await query.edit_message_text(
-        drv_text, reply_markup=InlineKeyboardMarkup(drv_cancel_kb), parse_mode="HTML", disable_web_page_preview=True
-    )
+    drv_cancel_kb = [[InlineKeyboardButton("❌ Voz kechish", callback_data=f"driver_cancel_{oid}")]]
+    await query.edit_message_text(f"🎉 <b>Buyurtma sizniki!</b>\n\n📞 Mijoz: {order['phone']}\n🏁 Manzil: {order['target']}\n📍 <a href='{order['location_text']}'>Lokatsiya</a>", reply_markup=InlineKeyboardMarkup(drv_cancel_kb), parse_mode="HTML", disable_web_page_preview=True)
 
     for msg_info in order.get("driver_messages", []):
         if int(msg_info["chat_id"]) != uid:
-            try:
-                other_w = workers.get(int(msg_info["chat_id"]))
-                other_lang = other_w.get("lang", "uz") if other_w else "uz"
-                ref_text = f"🔕 Buyurtma #{oid} boshqa haydovchi tomonidan olindi." if other_lang == "uz" else f"🔕 Заказ #{oid} принят другим водителем."
-                await context.bot.edit_message_text(chat_id=int(msg_info["chat_id"]), message_id=msg_info["message_id"], text=ref_text)
+            try: await context.bot.edit_message_text(chat_id=int(msg_info["chat_id"]), message_id=msg_info["message_id"], text=f"🔕 Buyurtma #{oid} boshqa haydovchi tomonidan olindi.")
             except Exception: pass
 
-    client_lang = order.get("client_lang", "uz")
-    c_btn = "❌ Buyurtmani bekor qilish" if client_lang == "uz" else "❌ Отменить заказ"
-    client_cancel_kb = [[InlineKeyboardButton(c_btn, callback_data=f"client_cancel_{oid}")]]
-    
-    if client_lang == "uz":
-        cl_text = (
-            f"✅ <b>Haydovchi topildi!</b>\n\n"
-            f"🛺 Ismi: {w['name']}\n"
-            f"📞 Telefon: {w['phone']}\n"
-            f"🚗 Mashina: {w['car_color']} {w['car_model']} ({w['car_number']})"
-        )
-    else:
-        cl_text = (
-            f"✅ <b>Водитель найден!</b>\n\n"
-            f"🛺 Имя: {w['name']}\n"
-            f"📞 Телефон: {w['phone']}\n"
-            f"🚗 Машина: {w['car_color']} {w['car_model']} ({w['car_number']})"
-        )
-        
-    try:
-        await context.bot.edit_message_text(chat_id=order["client_id"], message_id=order["client_msg_id"], text=cl_text, reply_markup=InlineKeyboardMarkup(client_cancel_kb), parse_mode="HTML")
+    client_cancel_kb = [[InlineKeyboardButton("❌ Bekor qilish", callback_data=f"client_cancel_{oid}")]]
+    cl_text = f"✅ <b>Haydovchi topildi!</b>\n\n🛺 Ismi: {w['name']}\n📞 Telefon: {w['phone']}\n🚗 Mashina: {w['car_color']} {w['car_model']} ({w['car_number']})"
+    try: await context.bot.edit_message_text(chat_id=order["client_id"], message_id=order["client_msg_id"], text=cl_text, reply_markup=InlineKeyboardMarkup(client_cancel_kb), parse_mode="HTML")
     except Exception: pass
 
-# ===================== BEKOR QILISH TIZIMI =====================
 async def client_cancel_order(update: Update, context):
     query = update.callback_query
     await query.answer()
+    global orders, workers
     oid = int(query.data.split("_")[2])
-    
     if oid not in orders: return
     order = orders[oid]
-    order["status"] = "cancelled_by_client"
     
+    if order["status"] == "cancelled_by_client":
+        return
+
+    order["status"] = "cancelled_by_client"
     wid = order["worker_id"]
     if wid and wid in workers:
         workers[wid]["balance"] += FIXED_COMMISSION
-        drv_lang = workers[wid].get("lang", "uz")
-        msg = f"🔕 Buyurtma #{oid} mijoz tomonidan bekor qilindi. Pul balansingizga qaytarildi." if drv_lang == "uz" else f"🔕 Заказ #{oid} отменен клиентом. Деньги возвращены на баланс."
-        try: await context.bot.send_message(wid, msg)
+        try: await context.bot.send_message(wid, f"🔕 Buyurtma #{oid} mijoz tomonidan bekor qilindi. Pul hisobingizga qaytarildi.")
         except Exception: pass
-        
     save_data()
-    await query.edit_message_text("Buyurtma bekor qilindi. / Заказ отменен.")
+    await query.edit_message_text("Buyurtmangiz muvaffaqiyatli bekor qilindi.")
 
 async def driver_cancel_order(update: Update, context):
     query = update.callback_query
     await query.answer()
+    global orders, workers
     oid = int(query.data.split("_")[2])
     uid = query.from_user.id
-    
     if oid not in orders: return
     order = orders[oid]
+    
     order["status"] = "pending"
     order["worker_id"] = None
-    
     if uid in workers:
         workers[uid]["balance"] += FIXED_COMMISSION
-        save_data()
-        
-    await query.edit_message_text("Siz buyurtmadan voz kechdingiz. Pul qaytarildi. / Вы отказались от заказа. Деньги возвращены.")
-    
-    try:
-        cl_lang = order.get("client_lang", "uz")
-        msg = f"⚠️ Haydovchi buyurtmani bekor qildi. Yangi haydovchi qidirilmoqda..." if cl_lang == "uz" else f"⚠️ Водитель отменил заказ. Ищем нового водителя..."
-        await context.bot.send_message(order["client_id"], msg)
+    save_data()
+    await query.edit_message_text("Siz buyurtmadan voz kechdingiz. Pul balansingizga qaytarildi.")
+    try: await context.bot.send_message(order["client_id"], "⚠️ Haydovchi buyurtmani bekor qildi. Tizim qayta qidirmoqda...")
     except Exception: pass
 
-# ===================== HAYDOVCHINI RO'YXATDAN O'TKAZISH =====================
+# ===================== HAYDOVCHI RO'YXATI =====================
 async def w_region(update: Update, context):
     query = update.callback_query
     await query.answer()
     reg_idx = query.data.replace("wreg_", "")
     context.user_data["w_region_idx"] = reg_idx
     context.user_data["w_region"] = REG_KEYS[int(reg_idx)]
-    lang = context.user_data.get("lang", "uz")
     
-    if lang == "uz":
-        await query.edit_message_text(f"Tanlangan viloyat: {context.user_data['w_region']}\nAsosiy tumaningizni tanlang:", reply_markup=districts_keyboard(reg_idx, "wdist_", "wback_region"))
-    else:
-        await query.edit_message_text(f"Выбранная область: {context.user_data['w_region']}\nВыберите основной район:", reply_markup=districts_keyboard(reg_idx, "wdist_", "wback_region"))
+    await query.edit_message_text(f"Viloyat: {context.user_data['w_region']}\nTumaningizni tanlang:", reply_markup=districts_keyboard(reg_idx, "wdist_", "wback_region"))
     return W_DISTRICT
 
 async def w_district(update: Update, context):
     query = update.callback_query
     await query.answer()
-    lang = context.user_data.get("lang", "uz")
     
     if query.data == "wback_region":
         await query.edit_message_text("Viloyatni tanlang:", reply_markup=regions_keyboard("wreg_"))
         return W_REGION
         
     d_idx = int(query.data.replace("wdist_", ""))
-    reg_idx = context.user_data["w_region_idx"]
-    context.user_data["w_district"] = REGIONS[REG_KEYS[int(reg_idx)]][d_idx]
+    reg_name = context.user_data["w_region"]
+    dist_name = list(REGIONS[reg_name].keys())[d_idx]
+    context.user_data["w_district"] = dist_name
     
-    msg = "Ism va familiyangizni kiriting:" if lang == "uz" else "Введите ваше имя и фамилию:"
-    await query.message.reply_text(msg, reply_markup=ReplyKeyboardRemove())
+    await query.edit_message_text(f"Tuman: {dist_name}\n🏠 Asosiy ish joyingiz (Qishloq/Shaharacha/Mahalla):", reply_markup=sub_districts_keyboard(reg_name, dist_name, "wsub_", "wback_dist"))
+    return W_SUB_DISTRICT
+
+async def w_sub_district(update: Update, context):
+    query = update.callback_query
+    await query.answer()
+    
+    if query.data == "wback_dist":
+        reg_idx = context.user_data["w_region_idx"]
+        await query.edit_message_text("Tumaningizni tanlang:", reply_markup=districts_keyboard(reg_idx, "wdist_", "wback_region"))
+        return W_DISTRICT
+        
+    s_idx = int(query.data.replace("wsub_", ""))
+    reg_name = context.user_data["w_region"]
+    dist_name = context.user_data["w_district"]
+    sub_name = REGIONS[reg_name][dist_name][s_idx]
+    context.user_data["w_sub_district"] = sub_name
+    
+    await context.bot.send_message(chat_id=query.from_user.id, text="Ism va familiyangizni kiriting:", reply_markup=ReplyKeyboardRemove())
     return W_NAME
 
 async def w_name(update: Update, context):
     context.user_data["w_name"] = update.message.text
-    lang = context.user_data.get("lang", "uz")
-    msg = "Mashinangiz modeli (Masalan: Labo, Damas):" if lang == "uz" else "Модель машины (Например: Labo, Damas):"
-    await update.message.reply_text(msg)
+    await update.message.reply_text("Mashinangiz modeli (Masalan: Labo, Damas):")
     return W_CAR_MODEL
 
 async def w_car_model(update: Update, context):
     context.user_data["w_car_model"] = update.message.text
-    lang = context.user_data.get("lang", "uz")
-    msg = "Mashina rangi:" if lang == "uz" else "Цвет машины:"
-    await update.message.reply_text(msg)
+    await update.message.reply_text("Mashina rangi:")
     return W_CAR_COLOR
 
 async def w_car_color(update: Update, context):
     context.user_data["w_car_color"] = update.message.text
-    lang = context.user_data.get("lang", "uz")
-    msg = "Mashina davlat raqami (Masalan: 01 A 777 AA):" if lang == "uz" else "Гос. номер машины (Например: 01 A 777 AA):"
-    await update.message.reply_text(msg)
+    await update.message.reply_text("Mashina davlat raqami (Masalan: 01 A 777 AA):")
     return W_CAR_NUMBER
 
 async def w_car_number(update: Update, context):
     context.user_data["w_car_number"] = update.message.text
-    lang = context.user_data.get("lang", "uz")
     kb = [[KeyboardButton("📱 Telefon raqamni yuborish", request_contact=True)]]
-    msg = "Telefon raqamingizni pastdagi tugma orqali yuboring:" if lang == "uz" else "Отправьте номер телефона с помощью кнопки ниже:"
-    await update.message.reply_text(msg, reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True, one_time_keyboard=True))
+    await update.message.reply_text("Telefon raqamingizni yuboring:", reply_markup=ReplyKeyboardMarkup(kb, resize_keyboard=True, one_time_keyboard=True))
     return W_PHONE
 
 async def w_phone(update: Update, context):
-    if update.message.contact: 
+    if update.message.contact:
         phone = update.message.contact.phone_number
-    else: 
+    else:
         phone = update.message.text
     context.user_data["w_phone"] = phone
     
@@ -736,7 +576,7 @@ async def w_phone(update: Update, context):
     text = (
         f"🚖 <b>HAYDOVCHI ANKETASI:</b>\n\n"
         f"👤 Ism: {data.get('w_name')}\n"
-        f"📍 Hudud: {data.get('w_region')}, {data.get('w_district')}\n"
+        f"📍 Hudud: {data.get('w_region')}, {data.get('w_district')}, {data.get('w_sub_district')}\n"
         f"🚗 Mashina: {data.get('w_car_color')} {data.get('w_car_model')}\n"
         f"🔢 Nomer: {data.get('w_car_number')}\n"
         f"📞 Telefon: {data.get('w_phone')}\n\n"
@@ -749,39 +589,35 @@ async def w_phone(update: Update, context):
 async def w_confirm(update: Update, context):
     query = update.callback_query
     await query.answer()
-    lang = context.user_data.get("lang", "uz")
+    global workers
     
     if query.data == "w_cancel":
-        await query.edit_message_text("Ro'yxatdan o'tish bekor qilindi. Qayta boshlash uchun /start bosing.")
+        await query.edit_message_text("Ro'yxatdan o'tish bekor qilindi. /start ni bosing.")
         return ConversationHandler.END
         
     uid = query.from_user.id
     data = context.user_data
     
     workers[uid] = {
-        "id": uid, "name": data.get("w_name"), "region": data.get("w_region"), "district": data.get("w_district"),
+        "id": uid, "name": data.get("w_name"), "region": data.get("w_region"), "district": data.get("w_district"), "sub_district": data.get("w_sub_district"),
         "car_model": data.get("w_car_model"), "car_color": data.get("w_car_color"), "car_number": data.get("w_car_number"),
-        "phone": data.get("w_phone"), "approved": False, "balance": 0, "total_orders": 0, "lang": lang
+        "phone": data.get("w_phone"), "approved": False, "balance": 0, "total_orders": 0, "lang": data.get("lang", "uz")
     }
     save_data()
     
-    await query.edit_message_text("✅ Arizangiz adminga yuborildi. Tasdiqlanganidan so'ng xabar olasiz.")
+    await query.edit_message_text("✅ Arizangiz adminga yuborildi. Tez orada tasdiqlanadi.")
     
-    admin_txt = (
-        f"🆕 <b>YANGI HAYDOVCHI:</b>\n\n"
-        f"ID: <code>{uid}</code>\n👤 Ism: {data.get('w_name')}\n"
-        f"📍 Hudud: {data.get('w_region')}, {data.get('w_district')}\n"
-        f"🚗 Mashina: {data.get('w_car_color')} {data.get('w_car_model')} ({data.get('w_car_number')})\n"
-        f"📞 Telefon: {data.get('w_phone')}"
-    )
+    admin_txt = f"🆕 <b>YANGI HAYDOVCHI:</b>\n\nID: <code>{uid}</code>\n👤 Ism: {data.get('w_name')}\n📍 Hudud: {data.get('w_region')}, {data.get('w_district')}, {data.get('w_sub_district')}"
     kb = [[InlineKeyboardButton("✅ Tasdiqlash", callback_data=f"admin_approve_{uid}")], [InlineKeyboardButton("❌ Rad etish", callback_data=f"admin_reject_{uid}")]]
     await context.bot.send_message(chat_id=ADMIN_ID, text=admin_txt, reply_markup=InlineKeyboardMarkup(kb), parse_mode="HTML")
     return ConversationHandler.END
 
-# ===================== ADMIN BUYRUQLARI =====================
+# ===================== ADMIN PANEL HODISALARI =====================
 async def admin_callback(update: Update, context):
     query = update.callback_query
     await query.answer()
+    global workers
+    
     act = query.data.split("_")[1]
     target_id = int(query.data.split("_")[2])
     
@@ -790,49 +626,30 @@ async def admin_callback(update: Update, context):
             workers[target_id]["approved"] = True
             save_data()
             await query.edit_message_text(f"✅ Haydovchi (ID: {target_id}) tasdiqlandi.")
-            try: await context.bot.send_message(target_id, "🎉 Arizangiz admin tomonidan tasdiqlandi! Ishni boshlashingiz mumkin. /start buyrug'ini bosing.", reply_markup=driver_menu_keyboard(workers[target_id]["lang"]))
+            try: await context.bot.send_message(target_id, "🎉 Arizangiz tasdiqlandi! Botni qayta ishga tushiring: /start", reply_markup=driver_menu_keyboard(workers[target_id]["lang"]))
             except Exception: pass
     elif act == "reject":
         if target_id in workers:
             del workers[target_id]
             save_data()
-            await query.edit_message_text(f"❌ Arizasi rad etildi.")
-            try: await context.bot.send_message(target_id, "Sizning arizangiz rad etildi.")
-            except Exception: pass
+            await query.edit_message_text(f"❌ Arizasi rad etildi va o'chirildi.")
 
 async def shaxsiy_kabinet(update: Update, context):
+    global workers
     uid = update.effective_user.id
     if uid not in workers: return
     w = workers[uid]
-    lang = w.get("lang", "uz")
-    
-    text = (
-        f"💳 <b>SHAXSIY KABINET</b>\n\n"
-        f"👤 Ism: {w['name']}\n"
-        f"💰 Balans: {w['balance']:,} so'm\n"
-        f"🛺 Jamg'argan buyurtmalar: {w['total_orders']} ta\n\n"
-        f"💵 Balansni to'ldirish uchun ushbu kartaga to'lov qiling:\n"
-        f"<code>{KARTA_RAQAM}</code> ({KARTA_EGA_SI})\n"
-        f"To'lovdan so'ng chekni adminga (@admin_username) yuboring."
-    ) if lang == "uz" else (
-        f"💳 <b>ЛИЧНЫЙ КАБИНЕТ</b>\n\n"
-        f"👤 Имя: {w['name']}\n"
-        f"💰 Баланс: {w['balance']:,} сум\n"
-        f"🛺 Всего заказов: {w['total_orders']} шт\n\n"
-        f"💵 Для пополнения баланса переведите средства на карту:\n"
-        f"<code>{KARTA_RAQAM}</code> ({KARTA_EGA_SI})\n"
-        f"После оплаты отправьте чек админу (@admin_username)."
-    )
+    text = f"💳 <b>SHAXSIY KABINET</b>\n\n👤 Ism: {w['name']}\n🏠 Hudud: {w['sub_district']}\n💰 Balans: {w['balance']:,} so'm\n🛺 Buyurtmalar: {w['total_orders']} ta\n\n💵 Karta: <code>{KARTA_RAQAM}</code>\nEga si: {KARTA_EGA_SI}"
     await update.message.reply_text(text, parse_mode="HTML")
 
 async def yordam_info(update: Update, context):
-    await update.message.reply_text("ℹ️ Labo yuk tashish xizmati.\nYordam olish uchun: @admin_username")
+    await update.message.reply_text("ℹ️ Labo xizmati bot tizimi v2.5.\nMurojaat uchun admin: @admin_username")
 
 async def cancel(update: Update, context):
-    await update.message.reply_text("Jarayon bekor qilindi. /start", reply_markup=ReplyKeyboardRemove())
+    await update.message.reply_text("Jarayon bekor qilindi. Bosh menyu: /start", reply_markup=ReplyKeyboardRemove())
     return ConversationHandler.END
 
-# ===================== ASOSIY ISHGA TUSHIRISH =====================
+# ===================== RUN =====================
 def main():
     application = Application.builder().token(BOT_TOKEN).build()
 
@@ -847,6 +664,7 @@ def main():
             ROLE: [CallbackQueryHandler(role_sel, pattern="^role_")],
             C_REGION: [CallbackQueryHandler(c_region, pattern="^reg_")],
             C_DISTRICT: [CallbackQueryHandler(c_district, pattern="^dist_|^back_region$")],
+            C_SUB_DISTRICT: [CallbackQueryHandler(c_sub_district, pattern="^csub_|^back_dist$")],
             C_TARGET: [MessageHandler(filters.TEXT & ~filters.COMMAND, c_target)],
             C_DESC: [MessageHandler(filters.TEXT & ~filters.COMMAND, c_desc)],
             C_TIME: [MessageHandler(filters.TEXT & ~filters.COMMAND, c_time)],
@@ -855,6 +673,7 @@ def main():
             C_CONFIRM: [CallbackQueryHandler(c_confirm, pattern="^c_confirm$|^c_cancel$")],
             W_REGION: [CallbackQueryHandler(w_region, pattern="^wreg_")],
             W_DISTRICT: [CallbackQueryHandler(w_district, pattern="^wdist_|^wback_region$")],
+            W_SUB_DISTRICT: [CallbackQueryHandler(w_sub_district, pattern="^wsub_|^wback_dist$")],
             W_NAME: [MessageHandler(filters.TEXT & ~filters.COMMAND, w_name)],
             W_CAR_MODEL: [MessageHandler(filters.TEXT & ~filters.COMMAND, w_car_model)],
             W_CAR_COLOR: [MessageHandler(filters.TEXT & ~filters.COMMAND, w_car_color)],
@@ -867,15 +686,14 @@ def main():
 
     application.add_handler(conv_handler)
     application.add_handler(MessageHandler(filters.Regex("^🔍 Buyurtmalarni qidirish|^🔍 Поиск заказов"), search_orders_cmd))
-    application.add_handler(MessageHandler(filters.Regex("^💳 Shaxsiy Kabinet \(Haydovchilar\)|^💳 Личный кабинет \(Водители\)"), shaxsiy_kabinet))
-    application.add_handler(MessageHandler(filters.Regex("^ℹ️ Yordam / Ma'lumot|^ℹ️ Помощь / Информация"), yordam_info))
+    application.add_handler(MessageHandler(filters.Regex("^💳 Shaxsiy Kabinet|^💳 Личный кабинет"), shaxsiy_kabinet))
+    application.add_handler(MessageHandler(filters.Regex("^ℹ️ Yordam|^ℹ️ Помощь"), yordam_info))
     application.add_handler(CallbackQueryHandler(refresh_search_callback, pattern="^refresh_search$"))
     application.add_handler(CallbackQueryHandler(accept_order, pattern="^accept_"))
     application.add_handler(CallbackQueryHandler(client_cancel_order, pattern="^client_cancel_"))
     application.add_handler(CallbackQueryHandler(driver_cancel_order, pattern="^driver_cancel_"))
     application.add_handler(CallbackQueryHandler(admin_callback, pattern="^admin_approve_|^admin_reject_"))
 
-    print("Bot muvaffaqiyatli ishga tushdi...")
     application.run_polling()
 
 if __name__ == "__main__":
