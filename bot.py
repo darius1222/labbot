@@ -9,7 +9,64 @@ from telegram.ext import (
     Application, CommandHandler, CallbackQueryHandler,
     MessageHandler, filters, ConversationHandler
 )
+import logging
+import os
+from math import radians, cos, sin, asin, sqrt
+from telegram import InlineKeyboardButton, InlineKeyboardMarkup, Update
+from telegram.ext import (
+    Application, CommandHandler, CallbackQueryHandler,
+    MessageHandler, filters, ConversationHandler
+)
 
+# Logging
+logging.basicConfig(level=logging.INFO, format='%(asctime)s - %(name)s - %(levelname)s - %(message)s')
+logger = logging.getLogger(__name__)
+
+# SOZLAMALAR
+
+# Haydovchilar bazasi (Sizning bazangiz shu formatda bo'lishi kerak)
+active_drivers_database = {
+    "driver1": {"lat": 40.78, "lon": 72.34}, # Misol uchun koordinatalar
+}
+
+# Masofani hisoblash funksiyasi
+def haversine(lon1, lat1, lon2, lat2):
+    R = 6372.8 
+    dLat = radians(lat2 - lat1)
+    dLon = radians(lon2 - lon1)
+    a = sin(dLat/2)**2 + cos(radians(lat1))*cos(radians(lat2))*sin(dLon/2)**2
+    return R * 2 * asin(sqrt(a))
+
+# Lokatsiyani qabul qiluvchi funksiya
+async def location_handler(update, context):
+    client_loc = update.message.location
+    lat1, lon1 = client_loc.latitude, client_loc.longitude
+    
+    found_drivers = []
+    for driver_id, loc in active_drivers_database.items():
+        dist = haversine(lon1, lat1, loc['lon'], loc['lat'])
+        if dist <= 2.0: # 2 km radiusda qidirish
+            found_drivers.append(driver_id)
+            
+    if found_drivers:
+        await update.message.reply_text(f"✅ Yaqin atrofdan {len(found_drivers)} ta haydovchi topildi! Siz bilan bog'lanishadi.")
+    else:
+        await update.message.reply_text("❌ Afsus, 2 km radiusda bo'sh haydovchi topilmadi.")
+
+async def start(update, context):
+    await update.message.reply_text("Assalomu alaykum! Iltimos, lokatsiyangizni yuboring (skrepka belgisi orqali).")
+
+def main():
+    app = Application.builder().token(BOT_TOKEN).build()
+    
+    app.add_handler(CommandHandler("start", start))
+    app.add_handler(MessageHandler(filters.LOCATION, location_handler))
+    
+    logger.info("Bot ishga tushdi...")
+    app.run_polling()
+
+if name == '__main__':
+    main()
 # Logging sozlamalari
 logging.basicConfig(
     level=logging.INFO, 
